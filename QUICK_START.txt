@@ -4,7 +4,7 @@ BUSINESS INTELLIGENCE HOMEWORK - QUICK START GUIDE
 
 Author: Abolfazl Omidian
 Student Number: 404443019
-Master's Degree in Information Technology - Organizational Architecture
+ Information Technology Student - Enterprise Architecture
 
 ================================================================================
 WHAT YOU HAVE
@@ -223,7 +223,7 @@ AUTHOR
 ================================================================================
 
 Name: Abolfazl Omidian
-Degree: Master's Degree in Information Technology - Organizational Architecture
+Degree:Information Technology Student - Enterprise Architecture
 Student Number: 404443019
 
 Report generated with Python, Pandas, Matplotlib, and SciPy

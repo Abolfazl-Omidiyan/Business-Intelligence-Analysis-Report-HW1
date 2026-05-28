@@ -2,7 +2,7 @@
 ## E-Commerce Query & Product Data Analysis
 
 **Author:** Abolfazl Omidiyan  
-**Degree:** Master's Student in Information Technology - Organizational Architecture  
+**Degree:** Master's Student in Information Technology - Enterprise Architecture  
 **Student Number:** 404443019
 
 ---
@@ -290,4 +290,4 @@ For questions about this project:
 **English Report Included:** Yes ✓  
 **Author Information Added:** Yes ✓
 
-https://ir.linkedin.com/in/abolfazl-omidiyan
+https://linkedin.com/in/abolfazl-omidiyan

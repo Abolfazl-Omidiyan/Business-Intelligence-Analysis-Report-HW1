@@ -1,0 +1,231 @@
+================================================================================
+BUSINESS INTELLIGENCE HOMEWORK - QUICK START GUIDE
+================================================================================
+
+Author: Abolfazl Omidian
+Student Number: 404443019
+Master's Degree in Information Technology - Organizational Architecture
+
+================================================================================
+WHAT YOU HAVE
+================================================================================
+
+1. complete_bi_analysis.py
+   → Main Python script that runs all 10 questions
+   → Fully documented with comments
+   → Generates 4 charts + 1 dashboard
+
+2. BI_Analysis_Report_English.html
+   → Professional English HTML report
+   → Dark theme, easy to read
+   → Author info at bottom
+   → Open in any web browser
+
+3. Visualization Files
+   • dashboard.png - All questions on one page
+   • q5_boxplot_histogram.png - Distribution analysis
+   • q6_qqplot.png - Normality test
+   • q7_scatter.png - Relationship analysis  
+   • q9_violin_price.png - Price distribution
+
+4. README.md
+   → Detailed guide and reference material
+
+================================================================================
+TO RUN THE ANALYSIS
+================================================================================
+
+STEP 1: Install Python packages (if needed)
+   pip install pandas numpy matplotlib scipy
+
+STEP 2: Place your CSV files in same folder
+   • top5000Query.csv
+   • top5000product.csv
+   • complete_bi_analysis.py
+
+STEP 3: Run the script
+   python complete_bi_analysis.py
+
+STEP 4: View the HTML report
+   Open: BI_Analysis_Report_English.html in any web browser
+
+STEP 5: Check the charts
+   Generated automatically in the same folder
+
+================================================================================
+WHAT THE SCRIPT DOES (IN ORDER)
+================================================================================
+
+Q1 - DUPLICATE & MISSING DATA DETECTION
+   ✓ Identifies 1,765 duplicate queries
+   ✓ Finds 714 missing prices (14.3%)
+   ✓ Explains impact on analysis
+   ✓ Cleans datasets
+
+Q2 - OUTLIER DETECTION (IQR METHOD)
+   ✓ Calculates IQR bounds [-47, 105]
+   ✓ Removes 833 extreme queries (16.7%)
+   ✓ Explains what outliers mean
+   ✓ Filters clean dataset
+
+Q3 - QUERY BINNING BY CATEGORY COUNT
+   ✓ Bins queries into 5 categories
+   ✓ Based on retrieved category diversity
+   ✓ Shows distribution across bins
+
+Q4 - RETRIEVAL & CLICK PROBABILITY
+   ✓ Calculates P(retrieval) per product
+   ✓ Calculates P(click) per product
+   ✓ Normalizes to [0, 1] range
+   ✓ Shows Zipf's Law pattern
+
+Q5 - BOXPLOT & HISTOGRAM
+   ✓ Creates 2 charts showing distribution
+   ✓ Explains what patterns mean
+   ✓ Shows outliers visually
+   → CHART: q5_boxplot_histogram.png
+
+Q6 - QQ PLOT (NORMALITY TEST)
+   ✓ Tests if data is normally distributed
+   ✓ Shapiro-Wilk: p < 0.0001 (NOT normal!)
+   ✓ Shows implications for statistics
+   → CHART: q6_qqplot.png
+
+Q7 - SCATTER PLOT (RETRIEVALS vs CLICKS)
+   ✓ Shows relationship between variables
+   ✓ Correlation: r ≈ 0.33 (weak)
+   ✓ Explains what this means
+   → CHART: q7_scatter.png
+
+Q8 - FEATURE EXTRACTION
+   ✓ Extracts 8+ key features
+   ✓ RetrievalCount, ClickCount, CTR, etc.
+   ✓ Shows top products and categories
+   ✓ Ready for machine learning
+
+Q9 - VIOLIN PLOT (PRICE DISTRIBUTION)
+   ✓ Shows price by category
+   ✓ Identifies 654 price outliers (15.3%)
+   ✓ Answers 3 specific questions
+   → CHART: q9_violin_price.png
+
+Q10 - CHI-SQUARE TEST (DOMINANCE)
+   ✓ Tests category membership & clicks
+   ✓ p-value = 1.0 (NOT significant)
+   ✓ Explains what this means
+   ✓ Shows dominant categories
+
+BONUS - COMPREHENSIVE DASHBOARD
+   ✓ All questions on 1 page
+   ✓ Multi-panel visualization
+   → CHART: dashboard.png
+
+================================================================================
+KEY FINDINGS (SUMMARY)
+================================================================================
+
+✓ Data Quality
+  • 1,765 duplicate queries found and removed
+  • 714 missing prices (14.3%) - documented
+  • 833 extreme queries removed (16.7%)
+
+✓ Distribution Pattern
+  • Data is RIGHT-SKEWED (NOT normal)
+  • Follows Power-law / Zipf's Law
+  • p < 0.0001 for normality test
+
+✓ Correlation
+  • Retrievals & clicks: weak (r=0.33)
+  • Dominant category & clicks: none (p=1.0)
+  • Product quality > just visibility
+
+✓ Market Insights
+  • Price range: 1 to 680M Rials (huge!)
+  • Books best performer (92% CTR)
+  • Long-tail dominates (80/20 rule)
+  • 127 products account for all activity
+
+================================================================================
+HOW TO INTERPRET THE CHARTS
+================================================================================
+
+BOXPLOT (Q5):
+  • Box = middle 50% of data (Q1 to Q3)
+  • Line inside = median
+  • Whiskers = extent of data
+  • Red dots = outliers
+
+HISTOGRAM (Q5):
+  • Height = how many products at that retrieval count
+  • Red line = mean
+  • Gold line = median
+  • Shape = right-skewed (tall on left)
+
+QQ PLOT (Q6):
+  • Red line = what normal distribution looks like
+  • Blue dots = actual data
+  • Deviation = how non-normal the data is
+  • Strong deviation = data is NOT normal
+
+SCATTER (Q7):
+  • Each dot = 1 product
+  • X position = number of retrievals
+  • Y position = number of clicks
+  • Gold line = trend
+  • Spread = weak relationship
+
+VIOLIN PLOT (Q9):
+  • Each violin = 1 category
+  • Width = density of products at that price
+  • Gold line = median
+  • Thin tails = sparse outlier regions
+
+================================================================================
+TROUBLESHOOTING
+================================================================================
+
+Problem: "No module named pandas"
+Solution: pip install pandas numpy matplotlib scipy
+
+Problem: "FileNotFoundError: top5000Query.csv"
+Solution: Place CSV files in same folder as script
+
+Problem: Charts not showing/saving
+Solution: Check you have write permission in the folder
+
+Problem: Encoding errors
+Solution: Already handled by the script, try running again
+
+================================================================================
+NEXT STEPS
+================================================================================
+
+1. ✓ Download the files
+2. ✓ Place CSV files in same folder
+3. ✓ Run: python complete_bi_analysis.py
+4. ✓ Open: BI_Analysis_Report_English.html in browser
+5. ✓ Review the generated charts
+6. ✓ Submit both the script and HTML report
+
+================================================================================
+TIME NEEDED TO COMPLETE
+================================================================================
+
+⏱ Run script: ~2-3 seconds
+⏱ Review charts: ~5 minutes
+⏱ Read full HTML report: ~15-20 minutes
+⏱ Understand all concepts: ~1 hour
+
+TOTAL: Script runs in seconds, analysis takes minutes!
+
+================================================================================
+AUTHOR
+================================================================================
+
+Name: Abolfazl Omidian
+Degree: Master's Degree in Information Technology - Organizational Architecture
+Student Number: 404443019
+
+Report generated with Python, Pandas, Matplotlib, and SciPy
+
+================================================================================

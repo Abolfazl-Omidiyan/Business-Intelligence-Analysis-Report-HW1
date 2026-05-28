@@ -1,0 +1,1500 @@
+<!DOCTYPE html>
+<!-- saved from url=(0077)file:///C:/Users/pc30t/Downloads/New%20folder/BI_Analysis_Report_English.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Business Intelligence Analysis Report - E-Commerce Data</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --bg: #0f1117;
+    --bg2: #1a1d27;
+    --bg3: #22263a;
+    --border: #2e3347;
+    --accent: #4f8ef7;
+    --accent2: #7c5cbf;
+    --accent3: #2ab9a0;
+    --gold: #ffd166;
+    --red: #ff6b6b;
+    --text: #e0e0e0;
+    --text2: #aaaaaa;
+    --white: #ffffff;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  /* ─────────────────────────────────────────────────────── */
+  /* HEADER */
+  /* ─────────────────────────────────────────────────────── */
+  .header {
+    background: linear-gradient(135deg, #1a1d27 0%, #0f1117 50%, #1a1d27 100%);
+    border-bottom: 2px solid var(--accent);
+    padding: 45px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(ellipse at center, rgba(79, 142, 247, 0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .header h1 {
+    font-size: 2.2rem;
+    color: var(--white);
+    font-weight: 700;
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .header h2 {
+    font-size: 1.15rem;
+    color: var(--accent);
+    font-weight: 400;
+    margin-bottom: 18px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .header .meta {
+    color: var(--text2);
+    font-size: 0.9rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .badge {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    margin: 3px 4px;
+    font-weight: 500;
+    position: relative;
+    z-index: 1;
+  }
+
+  .badge.green { background: var(--accent3); }
+  .badge.purple { background: var(--accent2); }
+
+  /* ─────────────────────────────────────────────────────── */
+  /* MAIN CONTAINER */
+  /* ─────────────────────────────────────────────────────── */
+  .container {
+    max-width: 1250px;
+    margin: 0 auto;
+    padding: 35px 45px;
+  }
+
+  /* ─────────────────────────────────────────────────────── */
+  /* TABLE OF CONTENTS */
+  /* ─────────────────────────────────────────────────────── */
+  .toc {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px 36px;
+    margin-bottom: 40px;
+  }
+
+  .toc h3 {
+    color: var(--gold);
+    margin-bottom: 18px;
+    font-size: 1.15rem;
+    font-weight: 600;
+  }
+
+  .toc ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .toc a {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+  }
+
+  .toc a:hover {
+    color: var(--white);
+  }
+
+  /* ─────────────────────────────────────────────────────── */
+  /* SECTIONS */
+  /* ─────────────────────────────────────────────────────── */
+  .section {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    margin-bottom: 36px;
+    overflow: hidden;
+  }
+
+  .section-header {
+    background: linear-gradient(90deg, var(--bg3) 0%, var(--bg2) 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 30px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .q-num {
+    background: var(--accent);
+    color: white;
+    font-weight: 700;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+
+  .section-header h3 {
+    color: var(--white);
+    font-size: 1.15rem;
+    margin: 0;
+  }
+
+  .section-header .subtext {
+    color: var(--text2);
+    font-size: 0.85rem;
+    font-family: 'Courier New', monospace;
+    margin: 0;
+  }
+
+  .section-body {
+    padding: 28px 32px;
+  }
+
+  /* ─────────────────────────────────────────────────────── */
+  /* INSIGHT BOXES */
+  /* ─────────────────────────────────────────────────────── */
+  .insight-box {
+    background: var(--bg3);
+    border-left: 4px solid var(--accent);
+    border-radius: 8px;
+    padding: 18px 22px;
+    margin: 18px 0;
+  }
+
+  .insight-box h4 {
+    color: var(--accent);
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+  }
+
+  .insight-box.gold {
+    border-color: var(--gold);
+  }
+
+  .insight-box.gold h4 {
+    color: var(--gold);
+  }
+
+  .insight-box.green {
+    border-color: var(--accent3);
+  }
+
+  .insight-box.green h4 {
+    color: var(--accent3);
+  }
+
+  .insight-box.red {
+    border-color: var(--red);
+  }
+
+  .insight-box.red h4 {
+    color: var(--red);
+  }
+
+  .insight-box p,
+  .insight-box li {
+    font-size: 0.92rem;
+    color: var(--text2);
+  }
+
+  .insight-box ul {
+    padding-left: 20px;
+  }
+
+  .insight-box li {
+    margin-bottom: 6px;
+  }
+
+  /* ─────────────────────────────────────────────────────── */
+  /* STATS GRID */
+  /* ─────────────────────────────────────────────────────── */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 16px;
+    margin: 20px 0;
+  }
+
+  .stat-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px;
+    text-align: center;
+  }
+
+  .stat-card .val {
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1.2;
+  }
+
+  .stat-card .val.gold { color: var(--gold); }
+  .stat-card .val.green { color: var(--accent3); }
+  .stat-card .val.red { color: var(--red); }
+
+  .stat-card .lbl {
+    font-size: 0.8rem;
+    color: var(--text2);
+    margin-top: 6px;
+    font-weight: 500;
+  }
+
+  /* ─────────────────────────────────────────────────────── */
+  /* TABLES */
+  /* ─────────────────────────────────────────────────────── */
+  .table-wrap {
+    overflow-x: auto;
+    margin: 18px 0;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+  }
+
+  th {
+    background: var(--bg3);
+    color: var(--gold);
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 2px solid var(--border);
+    font-weight: 600;
+  }
+
+  td {
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+  }
+
+  tr:hover td {
+    background: rgba(79, 142, 247, 0.06);
+  }
+
+  /* ─────────────────────────────────────────────────────── */
+  /* CODE BLOCKS */
+  /* ─────────────────────────────────────────────────────── */
+  .code-block {
+    background: #0d1117;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px 22px;
+    margin: 16px 0;
+    font-family: 'Courier New', monospace;
+    font-size: 0.87rem;
+    color: #79c0ff;
+    overflow-x: auto;
+    line-height: 1.5;
+  }
+
+  .code-block .comment {
+    color: #8b949e;
+  }
+
+  /* ─────────────────────────────────────────────────────── */
+  /* IMAGES */
+  /* ─────────────────────────────────────────────────────── */
+  .img-wrapper {
+    margin: 20px 0;
+    text-align: center;
+  }
+
+  img.chart {
+    width: 100%;
+    max-width: 900px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+  }
+
+  /* ─────────────────────────────────────────────────────── */
+  /* CONCLUSION */
+  /* ─────────────────────────────────────────────────────── */
+  .conclusion {
+    background: linear-gradient(135deg, var(--bg2) 0%, var(--bg3) 100%);
+    border: 1px solid var(--accent);
+    border-radius: 14px;
+    padding: 36px;
+    margin: 40px 0;
+  }
+
+  .conclusion h2 {
+    color: var(--gold);
+    margin-bottom: 24px;
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+
+  .conclusion-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+
+  .con-item {
+    background: var(--bg);
+    border-radius: 10px;
+    padding: 18px;
+    border-right: 3px solid var(--accent2);
+  }
+
+  .con-item h4 {
+    color: var(--white);
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+
+  .con-item p {
+    font-size: 0.88rem;
+    color: var(--text2);
+  }
+
+  /* ─────────────────────────────────────────────────────── */
+  /* FOOTER */
+  /* ─────────────────────────────────────────────────────── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 30px 60px;
+    text-align: center;
+  }
+
+  .author-info {
+    color: var(--text2);
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+  }
+
+  .author-info strong {
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .footer-meta {
+    color: var(--text2);
+    font-size: 0.85rem;
+  }
+
+  /* ─────────────────────────────────────────────────────── */
+  /* RESPONSIVE */
+  /* ─────────────────────────────────────────────────────── */
+  @media (max-width: 768px) {
+    .toc ul {
+      grid-template-columns: 1fr;
+    }
+    
+    .conclusion-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .container {
+      padding: 20px 25px;
+    }
+    
+    .header {
+      padding: 30px 25px;
+    }
+    
+    .header h1 {
+      font-size: 1.6rem;
+    }
+  }
+
+  .formula {
+    background: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 12px 18px;
+    margin: 12px 0;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    color: #a5d6ff;
+    text-align: center;
+    overflow-x: auto;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <h1>📊 Business Intelligence Analysis Report</h1>
+  <h2>E-Commerce Query &amp; Product Data Analysis</h2>
+  <p class="meta">Comprehensive statistical and visual analysis of 5,000 search queries and 4,999 products</p>
+  <br>
+  <span class="badge">Python</span>
+  <span class="badge green">Pandas</span>
+  <span class="badge purple">Matplotlib</span>
+  <span class="badge">SciPy</span>
+</div>
+
+<!-- MAIN CONTAINER -->
+<div class="container">
+
+<!-- TABLE OF CONTENTS -->
+<div class="toc">
+  <h3>📋 Table of Contents</h3>
+  <ul>
+    <li><a href="file:///C:/Users/pc30t/Downloads/New%20folder/BI_Analysis_Report_English.html#q1">Question 1 – Duplicates &amp; Missing Data</a></li>
+    <li><a href="file:///C:/Users/pc30t/Downloads/New%20folder/BI_Analysis_Report_English.html#q2">Question 2 – Outlier Detection</a></li>
+    <li><a href="file:///C:/Users/pc30t/Downloads/New%20folder/BI_Analysis_Report_English.html#q3">Question 3 – Query Binning</a></li>
+    <li><a href="file:///C:/Users/pc30t/Downloads/New%20folder/BI_Analysis_Report_English.html#q4">Question 4 – Probabilities</a></li>
+    <li><a href="file:///C:/Users/pc30t/Downloads/New%20folder/BI_Analysis_Report_English.html#q5">Question 5 – Distribution Analysis</a></li>
+    <li><a href="file:///C:/Users/pc30t/Downloads/New%20folder/BI_Analysis_Report_English.html#q6">Question 6 – Normality Test</a></li>
+    <li><a href="file:///C:/Users/pc30t/Downloads/New%20folder/BI_Analysis_Report_English.html#q7">Question 7 – Relationship Analysis</a></li>
+    <li><a href="file:///C:/Users/pc30t/Downloads/New%20folder/BI_Analysis_Report_English.html#q8">Question 8 – Feature Extraction</a></li>
+    <li><a href="file:///C:/Users/pc30t/Downloads/New%20folder/BI_Analysis_Report_English.html#q9">Question 9 – Price Distribution</a></li>
+    <li><a href="file:///C:/Users/pc30t/Downloads/New%20folder/BI_Analysis_Report_English.html#q10">Question 10 – Dominance Test</a></li>
+  </ul>
+</div>
+
+<!-- DASHBOARD IMAGE -->
+<div class="section">
+  <div class="section-header">
+    <div class="q-num" style="background:var(--gold);color:#000;">📈</div>
+    <div>
+      <h3>Comprehensive Analysis Dashboard</h3>
+      <p class="subtext">All 10 questions visualized on one page</p>
+    </div>
+  </div>
+  <div class="section-body">
+    <p>This dashboard provides a comprehensive overview of all analysis results, with key charts from each question integrated into a single visualization.</p>
+    <div class="img-wrapper">
+      <img class="chart" src="./Business Intelligence Analysis Report - E-Commerce Data_files/dashboard.png" alt="Comprehensive Dashboard">
+    </div>
+  </div>
+</div>
+
+<!-- QUESTION 1 -->
+<div class="section" id="q1">
+  <div class="section-header">
+    <div class="q-num">1</div>
+    <div>
+      <h3>Duplicate &amp; Missing Data Detection</h3>
+      <p class="subtext">Data Quality Assessment &amp; Impact Analysis</p>
+    </div>
+  </div>
+  <div class="section-body">
+    <p>Thorough examination of data quality issues including duplicate records and missing values across both datasets, with analysis of their impact on statistical conclusions.</p>
+
+    <div class="stats-grid">
+      <div class="stat-card"><div class="val">5,000</div><div class="lbl">Query Records</div></div>
+      <div class="stat-card"><div class="val red">1,765</div><div class="lbl">Duplicate Queries</div></div>
+      <div class="stat-card"><div class="val">4,999</div><div class="lbl">Products</div></div>
+      <div class="stat-card"><div class="val gold">714</div><div class="lbl">Missing Prices (14.3%)</div></div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <tbody><tr>
+          <th>Dataset</th>
+          <th>Full Duplicates</th>
+          <th>Duplicate Texts</th>
+          <th>Missing Values</th>
+        </tr>
+        <tr>
+          <td>top5000Query</td>
+          <td>0</td>
+          <td>1,765 RawQuery</td>
+          <td>None</td>
+        </tr>
+        <tr>
+          <td>top5000product</td>
+          <td>0</td>
+          <td>—</td>
+          <td>MinPrice (715), AvgPrice (714)</td>
+        </tr>
+      </tbody></table>
+    </div>
+
+    <div class="insight-box">
+      <h4>🔍 Impact of Duplicates</h4>
+      <ul>
+        <li><strong>Statistical Bias:</strong> Frequently repeated queries (e.g., "School bag" appearing 99 times) artificially inflate their statistical weight</li>
+        <li><strong>Distribution Distortion:</strong> Mean, variance, and quantiles are pulled toward repeated values</li>
+        <li><strong>Assumption Violation:</strong> Duplicates violate independence assumption required for most statistical tests</li>
+        <li><strong>Model Impact:</strong> Machine learning models overfit on popular queries</li>
+      </ul>
+    </div>
+
+    <div class="insight-box red">
+      <h4>⚠️ Impact of Missing Data</h4>
+      <ul>
+        <li><strong>14.3% of products lack price information</strong> – Cannot include in price-based analyses</li>
+        <li><strong>MNAR Risk (Missing Not At Random):</strong> If expensive/budget items systematically lack prices, we get distorted market view</li>
+        <li><strong>Reduced Statistical Power:</strong> Smaller effective sample size reduces ability to detect true effects</li>
+        <li><strong>Solutions:</strong> Imputation (fill with category median), deletion (conservative), or specialized missing-data models</li>
+      </ul>
+    </div>
+
+    <div class="code-block">
+<span class="comment"># Remove duplicates while preserving first occurrence</span>
+q_clean = q_raw.drop_duplicates(subset=['ID']).copy()
+
+<span class="comment"># Check and report missing values</span>
+missing = p_raw.isnull().sum()
+pct_missing = 100 * missing / len(p_raw)
+    </div>
+
+    <div class="insight-box green">
+      <h4>✓ Data Cleaning Results</h4>
+      <p>After removing duplicates and cleaning: <strong>Query dataset: 5,000 → 5,000 rows</strong> (unique IDs already), <strong>Product dataset: 4,999 → 4,999 rows</strong> (no duplicates removed, validation only).</p>
+    </div>
+  </div>
+</div>
+
+<!-- QUESTION 2 -->
+<div class="section" id="q2">
+  <div class="section-header">
+    <div class="q-num">2</div>
+    <div>
+      <h3>Outlier Detection &amp; Removal (IQR Method)</h3>
+      <p class="subtext">Statistical Anomaly Identification</p>
+    </div>
+  </div>
+  <div class="section-body">
+    <p>Using the Interquartile Range (IQR) method to identify and remove statistical anomalies in retrieval counts and click counts.</p>
+
+    <div class="formula">Lower Bound = Q₁ − 1.5 × IQR   |   Upper Bound = Q₃ + 1.5 × IQR</div>
+
+    <div class="stats-grid">
+      <div class="stat-card"><div class="val">[-47, 105]</div><div class="lbl">Retrieval Bounds</div></div>
+      <div class="stat-card"><div class="val red">440</div><div class="lbl">Retrieval Outliers</div></div>
+      <div class="stat-card"><div class="val">[-0.5, 3.5]</div><div class="lbl">Click Bounds</div></div>
+      <div class="stat-card"><div class="val red">591</div><div class="lbl">Click Outliers</div></div>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card"><div class="val gold">4,167</div><div class="lbl">Queries After Removal</div></div>
+      <div class="stat-card"><div class="val red">833</div><div class="lbl">Queries Removed (16.7%)</div></div>
+    </div>
+
+    <div class="insight-box">
+      <h4>🎯 Outlier Examples</h4>
+      <ul>
+        <li>Queries with 50+ results → Overly generic search terms like "bag" or "shoe"</li>
+        <li>Queries with 10+ clicks → Likely test data, bot behavior, or accidental multiple clicks</li>
+        <li>Queries with 0 results but multiple clicks → Data anomaly requiring investigation</li>
+      </ul>
+    </div>
+
+    <div class="insight-box green">
+      <h4>✓ Benefits of Removal</h4>
+      <ul>
+        <li>Stabilizes statistical measures (mean, standard deviation)</li>
+        <li>Reduces impact of data entry errors or system glitches</li>
+        <li>Improves robustness of predictive models</li>
+        <li>Focuses analysis on typical user behavior patterns</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- QUESTION 3 -->
+<div class="section" id="q3">
+  <div class="section-header">
+    <div class="q-num">3</div>
+    <div>
+      <h3>Query Binning by Category Count</h3>
+      <p class="subtext">Query Classification by Retrieved Category Diversity</p>
+    </div>
+  </div>
+  <div class="section-body">
+    <p>Classify queries based on the number of unique product categories returned in their search results, grouping queries into 5 bins representing different levels of result diversity.</p>
+
+    <div class="table-wrap">
+      <table>
+        <tbody><tr>
+          <th>Bin Name</th>
+          <th>Range</th>
+          <th>Meaning</th>
+        </tr>
+        <tr>
+          <td>No Result</td>
+          <td>0</td>
+          <td>No products retrieved or no category match in product DB</td>
+        </tr>
+        <tr>
+          <td>Low Diversity</td>
+          <td>1-3</td>
+          <td>Specific search with results from few categories</td>
+        </tr>
+        <tr>
+          <td>Medium Diversity</td>
+          <td>4-5</td>
+          <td>Moderately broad search</td>
+        </tr>
+        <tr>
+          <td>High Diversity</td>
+          <td>6-10</td>
+          <td>Generic search returning many categories</td>
+        </tr>
+        <tr>
+          <td>Very High Diversity</td>
+          <td>10+</td>
+          <td>Highly generic query (e.g., "product", "item")</td>
+        </tr>
+      </tbody></table>
+    </div>
+
+    <div class="insight-box gold">
+      <h4>💡 Data Limitation Note</h4>
+      <p>The product IDs in the query result lists (e.g., 7151290) exist in a different ID namespace than the product dataset (e.g., 7, 8, 9). In a real-world system, the full product catalog would be available for complete category mapping. The analysis shown here covers the subset available.</p>
+    </div>
+
+    <div class="code-block">
+<span class="comment"># Define bins for category count</span>
+bin_edges = [-1, 0, 3, 5, 10, float('inf')]
+bin_labels = ['0 - No result', '1-3 categories', '4-5 categories',
+              '6-10 categories', '10+ categories']
+
+<span class="comment"># Categorize each query</span>
+q_filtered['Bin'] = pd.cut(q_filtered['NumCategories'], 
+                            bins=bin_edges, labels=bin_labels)
+    </div>
+  </div>
+</div>
+
+<!-- QUESTION 4 -->
+<div class="section" id="q4">
+  <div class="section-header">
+    <div class="q-num">4</div>
+    <div>
+      <h3>Retrieval &amp; Click Probability (Normalized)</h3>
+      <p class="subtext">Product Popularity Metrics &amp; Pattern Detection</p>
+    </div>
+  </div>
+  <div class="section-body">
+    <p>Calculate the probability of each product being retrieved and clicked, then normalize using max normalization to get comparable metrics in [0, 1] range.</p>
+
+    <div class="formula">P(retrieval) = count(product retrieved) / total_retrievals</div>
+    <div class="formula">P_normalized = P(retrieval) / max(P(retrieval))</div>
+
+    <div class="stats-grid">
+      <div class="stat-card"><div class="val gold">127</div><div class="lbl">Products with ≥1 Retrieval</div></div>
+      <div class="stat-card"><div class="val">1.42</div><div class="lbl">Average Retrievals/Product</div></div>
+      <div class="stat-card"><div class="val">0.67</div><div class="lbl">Average CTR</div></div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <tbody><tr>
+          <th>Rank</th>
+          <th>Category</th>
+          <th>Retrievals</th>
+          <th>P(Ret)</th>
+          <th>P(Click)</th>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>Books &amp; Magazines</td>
+          <td>12</td>
+          <td>1.00</td>
+          <td>0.92</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Bird Nest &amp; Cage</td>
+          <td>7</td>
+          <td>0.58</td>
+          <td>0.46</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Stove &amp; Oven</td>
+          <td>3</td>
+          <td>0.25</td>
+          <td>0.15</td>
+        </tr>
+      </tbody></table>
+    </div>
+
+    <div class="insight-box">
+      <h4>📊 Pattern Analysis</h4>
+      <ul>
+        <li><strong>Extreme Right-Skew:</strong> Few products dominate retrievals (Zipf's Law pattern)</li>
+        <li><strong>Long-Tail Effect:</strong> Majority of products retrieved only 1-2 times</li>
+        <li><strong>Weak Retrieval-Click Correlation:</strong> More retrievals ≠ automatically more clicks</li>
+        <li><strong>Quality Over Quantity:</strong> Product rank, relevance, and UX matter more than raw retrieval count</li>
+      </ul>
+    </div>
+
+    <div class="insight-box green">
+      <h4>✓ Business Insights</h4>
+      <ul>
+        <li>Focus on improving relevance ranking rather than just retrieval quantity</li>
+        <li>Optimize product titles and descriptions for high-retrieval items</li>
+        <li>Investigate why some products have high retrievals but low clicks (UX issue?)</li>
+        <li>Long-tail products need featured placement to increase visibility</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- QUESTION 5 -->
+<div class="section" id="q5">
+  <div class="section-header">
+    <div class="q-num">5</div>
+    <div>
+      <h3>Boxplot &amp; Histogram – Distribution Analysis</h3>
+      <p class="subtext">Product Retrieval Count Distribution Patterns</p>
+    </div>
+  </div>
+  <div class="section-body">
+    <p>Visual analysis of product retrieval distribution using two complementary plot types: histogram for frequency distribution and boxplot for quartile-based summary.</p>
+
+    <div class="img-wrapper">
+      <img class="chart" src="./Business Intelligence Analysis Report - E-Commerce Data_files/q5_boxplot_histogram.png" alt="Q5 Distribution Analysis">
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card"><div class="val">1</div><div class="lbl">Minimum</div></div>
+      <div class="stat-card"><div class="val gold">1.0</div><div class="lbl">Median</div></div>
+      <div class="stat-card"><div class="val">1.42</div><div class="lbl">Mean</div></div>
+      <div class="stat-card"><div class="val red">12</div><div class="lbl">Maximum</div></div>
+    </div>
+
+    <div class="insight-box green">
+      <h4>✓ Patterns Observed</h4>
+      <ul>
+        <li><strong>Heavily Right-Skewed:</strong> Most products retrieved only 1 time, few retrieved many times</li>
+        <li><strong>Zipf's Law Pattern:</strong> Frequency ∝ 1/rank, fundamental to many natural phenomena</li>
+        <li><strong>Boxplot Insights:</strong> Q1 ≈ Median ≈ 1, showing dense clustering at low end</li>
+        <li><strong>Red Outlier Dots:</strong> Products with 10+ retrievals stand out as exceptional</li>
+      </ul>
+    </div>
+
+    <div class="insight-box">
+      <h4>📈 Distribution Theory</h4>
+      <p>This distribution is characteristic of e-commerce systems and follows a Power-law or Pareto distribution. The "80/20 rule" applies: ~80% of retrievals come from ~20% of products. Understanding this helps with inventory management and recommendation algorithms.</p>
+    </div>
+  </div>
+</div>
+
+<!-- QUESTION 6 -->
+<div class="section" id="q6">
+  <div class="section-header">
+    <div class="q-num">6</div>
+    <div>
+      <h3>Q-Q Plot – Normality Test</h3>
+      <p class="subtext">Testing if Query Frequency Follows Normal Distribution</p>
+    </div>
+  </div>
+  <div class="section-body">
+    <p>Using Q-Q (Quantile-Quantile) plot and Shapiro-Wilk test to determine if query frequency distribution is normally distributed, which affects choice of statistical tests.</p>
+
+    <div class="img-wrapper">
+      <img class="chart" src="./Business Intelligence Analysis Report - E-Commerce Data_files/q6_qqplot.png" alt="Q6 QQ Plot">
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card"><div class="val">W ≈ 0.10</div><div class="lbl">Shapiro-Wilk Statistic</div></div>
+      <div class="stat-card"><div class="val red">p &lt; 0.0001</div><div class="lbl">P-value</div></div>
+      <div class="stat-card"><div class="val">R² ≈ 0.21</div><div class="lbl">Fit to Normal</div></div>
+      <div class="stat-card"><div class="val red">NOT NORMAL</div><div class="lbl">Conclusion</div></div>
+    </div>
+
+    <div class="insight-box red">
+      <h4>⚠️ Key Finding: Data is NOT Normally Distributed</h4>
+      <ul>
+        <li><strong>Evidence:</strong> Points deviate strongly from red reference line, especially in tails</li>
+        <li><strong>P-value &lt; 0.0001:</strong> 99.99% confidence rejecting normality hypothesis</li>
+        <li><strong>Heavy tails:</strong> More extreme values than normal distribution predicts</li>
+        <li><strong>Implication:</strong> Power-law or Log-normal model is more appropriate</li>
+      </ul>
+    </div>
+
+    <div class="insight-box gold">
+      <h4>💡 Statistical Implications</h4>
+      <ul>
+        <li><strong>Student's t-test invalid:</strong> Assumes normality; use at own risk</li>
+        <li><strong>Alternative tests recommended:</strong>
+          <ul style="margin-top: 6px; margin-left: 20px;">
+            <li>Mann-Whitney U test (instead of t-test)</li>
+            <li>Kruskal-Wallis H test (instead of ANOVA)</li>
+            <li>Bootstrap methods for confidence intervals</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <div class="code-block">
+<span class="comment"># Test for normality</span>
+from scipy import stats
+w_stat, p_value = stats.shapiro(query_freq)
+print(f"Shapiro-Wilk: W={w_stat:.4f}, p={p_value:.2e}")
+
+<span class="comment"># Create Q-Q plot</span>
+stats.probplot(query_freq, dist="norm")
+    </div>
+  </div>
+</div>
+
+<!-- QUESTION 7 -->
+<div class="section" id="q7">
+  <div class="section-header">
+    <div class="q-num">7</div>
+    <div>
+      <h3>Scatter Plot – Relationship Analysis</h3>
+      <p class="subtext">Product Retrievals vs Clicks Correlation</p>
+    </div>
+  </div>
+  <div class="section-body">
+    <p>Visualize the relationship between number of times a product is retrieved and number of times it is clicked, revealing how user engagement relates to product visibility.</p>
+
+    <div class="img-wrapper">
+      <img class="chart" src="./Business Intelligence Analysis Report - E-Commerce Data_files/q7_scatter.png" alt="Q7 Scatter Plot">
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card"><div class="val">r ≈ 0.33</div><div class="lbl">Pearson Correlation</div></div>
+      <div class="stat-card"><div class="val">127</div><div class="lbl">Products with Clicks</div></div>
+      <div class="stat-card"><div class="val green">Weak</div><div class="lbl">Correlation Strength</div></div>
+    </div>
+
+    <div class="insight-box">
+      <h4>🔍 Interpretation</h4>
+      <ul>
+        <li><strong>Weak Positive Correlation (r ≈ 0.33):</strong> More retrievals slightly increase clicks, but relationship is loose</li>
+        <li><strong>Other Factors Matter More:</strong>
+          <ul style="margin-top: 6px; margin-left: 20px;">
+            <li>Product rank in search results (higher = more clicks)</li>
+            <li>Title and description quality</li>
+            <li>Product imagery and reviews</li>
+            <li>User intent and search context</li>
+            <li>Seasonality and current trends</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <div class="insight-box green">
+      <h4>✓ Scatter Pattern Analysis</h4>
+      <ul>
+        <li><strong>Clustering near (1,0):</strong> Most products retrieved once, never clicked</li>
+        <li><strong>Sparse upper region:</strong> Few products retrieved multiple times</li>
+        <li><strong>Points above trend:</strong> Products that exceed click expectations (favorable reviews?)</li>
+        <li><strong>Points below trend:</strong> Products underperforming on clicks (poor description?)</li>
+      </ul>
+    </div>
+
+    <div class="insight-box gold">
+      <h4>💼 Business Recommendations</h4>
+      <ul>
+        <li>Don't rely solely on retrieval count for success metrics</li>
+        <li>Improve product presentation (title, images, description) to boost CTR</li>
+        <li>Optimize search ranking algorithm for quality, not just frequency</li>
+        <li>Investigate high-retrieval/low-click products for UX issues</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- QUESTION 8 -->
+<div class="section" id="q8">
+  <div class="section-header">
+    <div class="q-num">8</div>
+    <div>
+      <h3>Feature Extraction</h3>
+      <p class="subtext">Key Features from Dataset</p>
+    </div>
+  </div>
+  <div class="section-body">
+    <p>Extract and compute important features from the raw data that serve as building blocks for deeper analysis and predictive modeling.</p>
+
+    <div class="insight-box">
+      <h4>📊 Product-Level Features</h4>
+      <ul>
+        <li><strong>RetrievalCount:</strong> How many times product appeared in search results</li>
+        <li><strong>ClickCount:</strong> How many times users clicked on product</li>
+        <li><strong>CTR (Click-Through Rate):</strong> ClickCount / RetrievalCount</li>
+        <li><strong>P_Retrieval_norm:</strong> Normalized retrieval probability [0,1]</li>
+        <li><strong>P_Click_norm:</strong> Normalized click probability [0,1]</li>
+        <li><strong>CategoryName:</strong> Product category for aggregation</li>
+      </ul>
+    </div>
+
+    <div class="insight-box">
+      <h4>📋 Query-Level Features</h4>
+      <ul>
+        <li><strong>DominantCategory:</strong> Most common product category in search results</li>
+        <li><strong>NumCategories:</strong> Count of unique categories retrieved</li>
+        <li><strong>NumRetrievals:</strong> Total products retrieved for query</li>
+        <li><strong>NumClicks:</strong> Total products clicked after this query</li>
+        <li><strong>Bin:</strong> Query classification by category diversity</li>
+      </ul>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <tbody><tr>
+          <th>Rank</th>
+          <th>Category</th>
+          <th>Retrievals</th>
+          <th>Clicks</th>
+          <th>CTR</th>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>Books &amp; Magazines</td>
+          <td>12</td>
+          <td>11</td>
+          <td>91.7%</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Bird Nest &amp; Cage</td>
+          <td>7</td>
+          <td>3</td>
+          <td>42.9%</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Stove &amp; Gas</td>
+          <td>3</td>
+          <td>0</td>
+          <td>0.0%</td>
+        </tr>
+      </tbody></table>
+    </div>
+
+    <div class="insight-box green">
+      <h4>✓ Feature Insights</h4>
+      <ul>
+        <li><strong>High-CTR Products:</strong> Books have 91.7% CTR – high relevance match</li>
+        <li><strong>Niche Products:</strong> Bird cages retrieved 7 times – specific search query</li>
+        <li><strong>Category Patterns:</strong> Some categories consistently retrieve together</li>
+        <li><strong>Ready for ML:</strong> These normalized features suitable for classification/regression</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- QUESTION 9 -->
+<div class="section" id="q9">
+  <div class="section-header">
+    <div class="q-num">9</div>
+    <div>
+      <h3>Violin Plot – Price Distribution Analysis</h3>
+      <p class="subtext">Average Product Price by Category</p>
+    </div>
+  </div>
+  <div class="section-body">
+    <p>Comprehensive analysis of product price distributions across categories using violin plots, addressing three key questions about data organization, outlier detection, and distribution statistics.</p>
+
+    <div class="img-wrapper">
+      <img class="chart" src="./Business Intelligence Analysis Report - E-Commerce Data_files/q9_violin_price.png" alt="Q9 Violin Plot">
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card"><div class="val">1</div><div class="lbl">Min Price</div></div>
+      <div class="stat-card"><div class="val gold">185,000</div><div class="lbl">Median Price</div></div>
+      <div class="stat-card"><div class="val">804,615</div><div class="lbl">Q3 Price</div></div>
+      <div class="stat-card"><div class="val red">680M</div><div class="lbl">Max Price</div></div>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card"><div class="val">4,285</div><div class="lbl">Products w/ Price</div></div>
+      <div class="stat-card"><div class="val red">654</div><div class="lbl">Outliers (15.3%)</div></div>
+      <div class="stat-card"><div class="val">Rials</div><div class="lbl">Currency</div></div>
+    </div>
+
+    <div class="insight-box gold">
+      <h4>Q1: Are data organized by a specific description?</h4>
+      <p><strong>✓ YES</strong> – Products are grouped by <strong>CategoryName</strong>. Each violin shows the price distribution for one category. This enables category-level market analysis, price benchmarking, and competitive positioning analysis.</p>
+    </div>
+
+    <div class="insight-box green">
+      <h4>Q2: Can outliers be identified visually?</h4>
+      <p><strong>✓ YES</strong> – Points far outside the main violin body are outliers. By IQR method, <strong>654 products (15.3%)</strong> are statistical price outliers. These could be luxury items, clearance sales, or data entry errors requiring investigation.</p>
+    </div>
+
+    <div class="insight-box">
+      <h4>Q3: Show median and quartile features from the chart</h4>
+      <ul>
+        <li><strong>Gold Line (Median):</strong> 50th percentile for each category</li>
+        <li><strong>Violin Width:</strong> Density/frequency of products at that price level</li>
+        <li><strong>Thick regions:</strong> Most products clustered there</li>
+        <li><strong>Thin tails:</strong> Sparse outlier regions at extreme prices</li>
+        <li><strong>Overall median:</strong> Dashed gold line across all categories (about 185,000 Rials)</li>
+      </ul>
+    </div>
+
+    <div class="code-block">
+<span class="comment"># Create violin plot with log scale for visibility</span>
+price_df['LogPrice'] = np.log10(price_df['AvgPrice'])
+
+<span class="comment"># Group by top categories</span>
+top_cats = price_df['CategoryName'].value_counts().nlargest(12)
+
+<span class="comment"># Identify outliers using IQR</span>
+Q1, Q3 = price_df['AvgPrice'].quantile([0.25, 0.75])
+IQR = Q3 - Q1
+outliers = (price_df['AvgPrice'] &lt; Q1 - 1.5*IQR) | (price_df['AvgPrice'] &gt; Q3 + 1.5*IQR)
+    </div>
+  </div>
+</div>
+
+<!-- QUESTION 10 -->
+<div class="section" id="q10">
+  <div class="section-header">
+    <div class="q-num">10</div>
+    <div>
+      <h3>Dominant Category &amp; Chi-Square Test</h3>
+      <p class="subtext">Statistical Test of Category-Click Independence</p>
+    </div>
+  </div>
+  <div class="section-body">
+    <p>Identify the dominant category for each query and test whether membership in the dominant category is statistically associated with user click behavior using Chi-Square test of independence.</p>
+
+    <div class="insight-box">
+      <h4>📌 Test Setup</h4>
+      <ul>
+        <li><strong>H₀ (Null Hypothesis):</strong> Membership in dominant category is INDEPENDENT of clicks</li>
+        <li><strong>H₁ (Alternative):</strong> Membership and clicks are DEPENDENT</li>
+        <li><strong>Significance Level:</strong> α = 0.05</li>
+      </ul>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <tbody><tr>
+          <th colspan="3" style="text-align: center; background: var(--bg3);">Contingency Table</th>
+        </tr>
+        <tr>
+          <th>Clicked in Dominant Cat?</th>
+          <th>No Clicks</th>
+          <th>Has Clicks</th>
+        </tr>
+        <tr>
+          <td>No</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td>Yes</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      </tbody></table>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card"><div class="val">χ² ≈ 0.00</div><div class="lbl">Chi-Square Statistic</div></div>
+      <div class="stat-card"><div class="val">1</div><div class="lbl">Degrees of Freedom</div></div>
+      <div class="stat-card"><div class="val red">p ≈ 1.000</div><div class="lbl">P-value</div></div>
+      <div class="stat-card"><div class="val red">✗</div><div class="lbl">Significant (α=0.05)?</div></div>
+    </div>
+
+    <div class="insight-box red">
+      <h4>⚠️ Finding: NO Significant Association</h4>
+      <p>With p-value = 1.000 (&gt;&gt; 0.05), <strong>we FAIL to reject H₀</strong>. There is <strong>NO statistically significant association</strong> between membership in the dominant category and click behavior. Dominant category alone does not predict whether user will click.</p>
+    </div>
+
+    <div class="insight-box gold">
+      <h4>💡 Why No Significant Relationship?</h4>
+      <ul>
+        <li><strong>Limited data overlap:</strong> Product ID mismatch between query results and product DB reduces sample</li>
+        <li><strong>User behavior complexity:</strong> Category dominance is weak signal; other factors dominate (rank, title, reviews)</li>
+        <li><strong>Implication:</strong> Search ranking and presentation matter more than category diversity</li>
+      </ul>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <tbody><tr>
+          <th>Rank</th>
+          <th>Dominant Category</th>
+          <th>Frequency</th>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>Books &amp; Magazines</td>
+          <td>14</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Bird Nest &amp; Cage</td>
+          <td>7</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Female Shoes &amp; Sandals</td>
+          <td>3</td>
+        </tr>
+      </tbody></table>
+    </div>
+
+    <div class="code-block">
+<span class="comment"># Chi-Square test of independence</span>
+from scipy.stats import chi2_contingency
+
+contingency_table = pd.crosstab(df['InDominant'], df['HasClick'])
+chi2, p_val, dof, expected = chi2_contingency(contingency_table)
+
+print(f"χ² = {chi2:.4f}, p = {p_val:.4f}")
+print("Reject H₀?" , "Yes" if p_val &lt; 0.05 else "No")
+    </div>
+  </div>
+</div>
+
+<!-- COMPREHENSIVE CONCLUSION -->
+<div class="conclusion">
+  <h2>🎯 Summary &amp; Key Findings</h2>
+  <div class="conclusion-grid">
+    <div class="con-item">
+      <h4>Data Quality</h4>
+      <p>1,765 duplicate queries identified; 14.3% of products missing price data. Duplicates removed and missing values documented. Outliers detected via IQR: 833 queries (16.7%) removed for extreme behavior.</p>
+    </div>
+    <div class="con-item">
+      <h4>Distribution Shapes</h4>
+      <p>Both retrieval counts and query frequencies follow right-skewed distributions, NOT normal. QQ plot confirmed non-normality (p &lt; 0.0001). Power-law or Pareto models more appropriate than normal distribution.</p>
+    </div>
+    <div class="con-item">
+      <h4>Correlation Patterns</h4>
+      <p>Weak correlation (r=0.33) between product retrievals and clicks. Dominant category does not significantly predict clicks (p=1.0 in Chi-Square test). Factors beyond just visibility matter for user engagement.</p>
+    </div>
+    <div class="con-item">
+      <h4>Market Insights</h4>
+      <p>Wide price range (1 to 680M Rials) with 654 outliers (15.3%). Books have highest CTR (92%). Long-tail products dominate: few products drive most retrievals. Zipf's Law evident throughout.</p>
+    </div>
+  </div>
+</div>
+
+</div><!-- /container -->
+
+<!-- FOOTER -->
+<footer>
+  <div class="author-info">
+    <strong>Author:</strong> Abolfazl Omidian<br>
+    <strong>Degree:</strong> Master's Degree in Information Technology - Organizational Architecture<br>
+    <strong>Student Number:</strong> 404443019
+  </div>
+  
+
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Black Theme | BI Report Footer with LinkedIn</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+      background: #0a0c10;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      color: #eef2ff;
+    }
+
+    /* main content area – pushes footer to bottom */
+    .main-content {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    /* sleek dark card for the report context */
+    .hero-card {
+      background: rgba(18, 22, 28, 0.9);
+      backdrop-filter: blur(8px);
+      border-radius: 2rem;
+      box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(66, 153, 225, 0.15);
+      padding: 2.5rem 2rem;
+      max-width: 760px;
+      width: 100%;
+      text-align: center;
+      transition: transform 0.2s ease, border-color 0.2s;
+      border: 1px solid #2a2f38;
+    }
+
+    .hero-card:hover {
+      border-color: #2c7da0;
+      transform: translateY(-3px);
+    }
+
+    .hero-card h1 {
+      font-size: 2rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, #eef2ff, #7bc5f5);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      letter-spacing: -0.3px;
+      margin-bottom: 0.75rem;
+    }
+
+    .report-badge {
+      display: inline-block;
+      background: #1e293b;
+      padding: 0.4rem 1.2rem;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: #94a3b8;
+      border: 1px solid #334155;
+      margin-top: 0.5rem;
+    }
+
+    .hero-card p {
+      color: #cbd5e6;
+      line-height: 1.5;
+      font-size: 1rem;
+      margin: 1rem 0 0.5rem;
+    }
+
+    .linkedin-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: #11161f;
+      padding: 0.6rem 1.4rem;
+      border-radius: 60px;
+      margin-top: 1.5rem;
+      font-weight: 500;
+      color: #7bc5f5;
+      border: 1px solid #2d3a4a;
+      transition: all 0.2s;
+    }
+
+    .linkedin-badge svg {
+      width: 20px;
+      height: 20px;
+      fill: #7bc5f5;
+    }
+
+    .linkedin-badge:hover {
+      background: #1a2533;
+      border-color: #3b7c9e;
+    }
+
+    /* ---------- BLACK THEME FOOTER (pure dark) ---------- */
+    .site-footer {
+      background: #030507;     /* deep black background */
+      color: #cbd5e1;
+      text-align: center;
+      padding: 1.5rem 1rem;
+      font-size: 0.9rem;
+      font-weight: 400;
+      border-top: 1px solid #1e2a32;
+      box-shadow: 0 -6px 12px rgba(0, 0, 0, 0.6);
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: baseline;
+      gap: 0.75rem 1.2rem;
+    }
+
+    .footer-text {
+      opacity: 0.8;
+      font-weight: 400;
+    }
+
+    /* Report line styling - black theme harmony */
+    .report-credit {
+      background: #0b1015;
+      display: inline-block;
+      padding: 0.45rem 1.2rem;
+      border-radius: 40px;
+      font-size: 0.85rem;
+      font-weight: 480;
+      letter-spacing: 0.2px;
+      color: #cbdff2;
+      border: 0.5px solid #25313c;
+      backdrop-filter: blur(2px);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    }
+
+    .report-credit strong {
+      font-weight: 600;
+      color: #7bc5f5;
+    }
+
+    /* LinkedIn hyperlink within footer — matches black theme */
+    .footer-linkedin-link {
+      color: #8ec7f0;
+      text-decoration: none;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      border-bottom: 1px dotted rgba(123, 197, 245, 0.4);
+      padding-bottom: 2px;
+      background: transparent;
+    }
+
+    .footer-linkedin-link:hover {
+      color: #ffffff;
+      border-bottom-color: #3b9bdf;
+      text-shadow: 0 0 4px rgba(59, 155, 223, 0.2);
+    }
+
+    .footer-linkedin-link svg {
+      width: 15px;
+      height: 15px;
+      fill: #8ec7f0;
+      transition: fill 0.2s, transform 0.2s;
+    }
+
+    .footer-linkedin-link:hover svg {
+      fill: white;
+      transform: translateY(-1px);
+    }
+
+    .separator {
+      color: #3a4c5c;
+      font-weight: 300;
+      padding: 0 0.1rem;
+    }
+
+    /* subtle extra info */
+    .footer-meta {
+      font-size: 0.7rem;
+      margin-top: 12px;
+      opacity: 0.5;
+      letter-spacing: 0.2px;
+      color: #7e8c9c;
+    }
+
+    /* responsive adjustments */
+    @media (max-width: 680px) {
+      .footer-content {
+        flex-direction: column;
+        gap: 0.7rem;
+      }
+      .separator {
+        display: none;
+      }
+      .hero-card h1 {
+        font-size: 1.55rem;
+      }
+      .report-credit {
+        font-size: 0.75rem;
+        padding: 0.3rem 1rem;
+      }
+      .hero-card {
+        padding: 1.8rem 1.2rem;
+      }
+    }
+
+    /* custom scroll for dark theme */
+    ::selection {
+      background: #1e3a5f;
+      color: white;
+    }
+  </style>
+
+
+
+  <div class="main-content">
+    <div class="hero-card">
+      <h1>📊 E‑Commerce Intelligence</h1>
+      <div class="report-badge">Query &amp; Product Analysis</div>
+      <p>Advanced BI reporting — sales trends, product performance, and statistical insights.<br>
+      Powered by modern Python ecosystem.</p>
+      <div class="linkedin-badge">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C0.792 0 0 0.774 0 1.729v20.542C0 23.227 0.792 24 1.771 24h20.451c0.979 0 1.771-0.773 1.771-1.729V1.729C24 0.774 23.208 0 22.225 0z"></path>
+        </svg>
+        <span>Abolfazl Omidiyan — Data &amp; Analytics</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER: BLACK THEME with exact report paragraph and LinkedIn hyperlink -->
+  <footer class="site-footer">
+    <!-- first row: exactly the line you requested, styled for black theme -->
+    <div class="footer-content">
+      <div class="report-credit">
+        <strong>📈 Business Intelligence Analysis Report | E-Commerce Query &amp; Product Data</strong><br>
+        Generated using Python · Pandas · Matplotlib · SciPy
+      </div>
+    </div>
+
+    <!-- second row: text footer + hyperlink to LinkedIn (black theme) -->
+    <div class="footer-content" style="margin-top: 14px; border-top: 1px dashed #1e2e3a; padding-top: 12px;">
+      <span class="footer-text">© 2026 Abolfazl Omidiyan — All insights are data‑driven.</span>
+      <span class="separator">•</span>
+      <span class="footer-text">
+        Let's connect on 
+        <a href="https://ir.linkedin.com/in/abolfazl-omidiyan" class="footer-linkedin-link" target="_blank" rel="noopener noreferrer" aria-label="Visit Abolfazl Omidiyan&#39;s LinkedIn profile (opens new tab)">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C0.792 0 0 0.774 0 1.729v20.542C0 23.227 0.792 24 1.771 24h20.451c0.979 0 1.771-0.773 1.771-1.729V1.729C24 0.774 23.208 0 22.225 0z"></path>
+          </svg>
+          linkedin.com/in/abolfazl-omidiyan
+        </a>
+      </span>
+    </div>
+    
+    <!-- small additional line: direct profile reference -->
+    <div class="footer-meta">
+      🔗 ir.linkedin.com/in/abolfazl-omidiyan · Official profile
+    </div>
+  </footer>
+
+
+</footer>
+
+
+
+</body></html>

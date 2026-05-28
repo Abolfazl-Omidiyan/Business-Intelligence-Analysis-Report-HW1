@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>گزارش کامل پروژه هوش تجاری - تحلیل داده‌های جستجو و محصول</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --bg: #0f1117;
+    --bg2: #1a1d27;
+    --bg3: #22263a;
+    --border: #2e3347;
+    --accent: #4f8ef7;
+    --accent2: #7c5cbf;
+    --accent3: #2ab9a0;
+    --gold: #ffd166;
+    --red: #ff6b6b;
+    --text: #e0e0e0;
+    --text2: #aaaaaa;
+    --white: #ffffff;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Vazirmatn', 'Segoe UI', Tahoma, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.8;
+    direction: rtl;
+    text-align: right;
+  }
+
+  .header {
+    background: linear-gradient(135deg, #1a1d27 0%, #0f1117 50%, #1a1d27 100%);
+    border-bottom: 3px solid var(--accent);
+    padding: 50px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(ellipse at center, rgba(79, 142, 247, 0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .header h1 {
+    font-size: 2.4rem;
+    color: var(--white);
+    font-weight: 700;
+    margin-bottom: 12px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .header h2 {
+    font-size: 1.2rem;
+    color: var(--accent);
+    font-weight: 400;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .author-box {
+    background: rgba(79, 142, 247, 0.15);
+    border: 1px solid var(--accent);
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+    display: inline-block;
+    position: relative;
+    z-index: 1;
+  }
+
+  .author-box p {
+    margin: 6px 0;
+    color: var(--text);
+    font-size: 0.95rem;
+  }
+
+  .author-box strong {
+    color: var(--gold);
+    font-weight: 600;
+  }
+
+  .container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 40px 50px;
+  }
+
+  .toc {
+    background: var(--bg2);
+    border: 2px solid var(--border);
+    border-radius: 14px;
+    padding: 32px 40px;
+    margin-bottom: 45px;
+  }
+
+  .toc h3 {
+    color: var(--gold);
+    margin-bottom: 22px;
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+
+  .toc ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .toc a {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.97rem;
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: all 0.2s;
+  }
+
+  .toc a:hover {
+    background: rgba(79, 142, 247, 0.2);
+    color: var(--white);
+  }
+
+  .section {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    margin-bottom: 40px;
+    overflow: hidden;
+  }
+
+  .section-header {
+    background: linear-gradient(90deg, var(--bg3) 0%, var(--bg2) 100%);
+    border-bottom: 2px solid var(--border);
+    padding: 24px 35px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+
+  .q-num {
+    background: var(--accent);
+    color: white;
+    font-weight: 700;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(79, 142, 247, 0.3);
+  }
+
+  .section-header h3 {
+    color: var(--white);
+    font-size: 1.2rem;
+    margin: 0;
+    font-weight: 600;
+  }
+
+  .section-body {
+    padding: 32px 40px;
+  }
+
+  .insight-box {
+    background: var(--bg3);
+    border-right: 5px solid var(--accent);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin: 20px 0;
+  }
+
+  .insight-box h4 {
+    color: var(--accent);
+    margin-bottom: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .insight-box.gold {
+    border-color: var(--gold);
+  }
+
+  .insight-box.gold h4 {
+    color: var(--gold);
+  }
+
+  .insight-box.green {
+    border-color: var(--accent3);
+  }
+
+  .insight-box.green h4 {
+    color: var(--accent3);
+  }
+
+  .insight-box.red {
+    border-color: var(--red);
+  }
+
+  .insight-box.red h4 {
+    color: var(--red);
+  }
+
+  .insight-box p,
+  .insight-box li {
+    font-size: 0.93rem;
+    color: var(--text2);
+    margin: 6px 0;
+  }
+
+  .insight-box ul {
+    padding-right: 20px;
+    margin: 10px 0;
+  }
+
+  .insight-box li {
+    margin-bottom: 8px;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 18px;
+    margin: 22px 0;
+  }
+
+  .stat-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .stat-card .val {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1.2;
+  }
+
+  .stat-card .val.gold { color: var(--gold); }
+  .stat-card .val.green { color: var(--accent3); }
+  .stat-card .val.red { color: var(--red); }
+
+  .stat-card .lbl {
+    font-size: 0.82rem;
+    color: var(--text2);
+    margin-top: 8px;
+    font-weight: 500;
+  }
+
+  .table-wrap {
+    overflow-x: auto;
+    margin: 20px 0;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+
+  th {
+    background: var(--bg3);
+    color: var(--gold);
+    padding: 14px 16px;
+    text-align: right;
+    border-bottom: 2px solid var(--border);
+    font-weight: 600;
+  }
+
+  td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+  }
+
+  tr:hover td {
+    background: rgba(79, 142, 247, 0.08);
+  }
+
+  .code-block {
+    background: #0d1117;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 18px 0;
+    font-family: 'Courier New', monospace;
+    font-size: 0.88rem;
+    color: #79c0ff;
+    overflow-x: auto;
+    line-height: 1.6;
+    direction: ltr;
+    text-align: left;
+  }
+
+  .answer-box {
+    background: var(--bg3);
+    border-left: 5px solid var(--accent3);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 18px 0;
+  }
+
+  .answer-box h5 {
+    color: var(--accent3);
+    margin-bottom: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .answer-box p {
+    color: var(--text);
+    margin: 8px 0;
+    line-height: 1.8;
+  }
+
+  .conclusion {
+    background: linear-gradient(135deg, var(--bg2) 0%, var(--bg3) 100%);
+    border: 2px solid var(--accent);
+    border-radius: 16px;
+    padding: 40px;
+    margin: 45px 0;
+  }
+
+  .conclusion h2 {
+    color: var(--gold);
+    margin-bottom: 28px;
+    font-size: 1.3rem;
+    font-weight: 700;
+  }
+
+  .conclusion-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .con-item {
+    background: var(--bg);
+    border-radius: 12px;
+    padding: 20px;
+    border-right: 4px solid var(--accent2);
+  }
+
+  .con-item h4 {
+    color: var(--white);
+    margin-bottom: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .con-item p {
+    font-size: 0.9rem;
+    color: var(--text2);
+    line-height: 1.7;
+  }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 35px 60px;
+    text-align: center;
+    margin-top: 50px;
+  }
+
+  .author-info {
+    color: var(--text);
+    font-size: 0.93rem;
+    margin-bottom: 10px;
+    line-height: 1.8;
+  }
+
+  .author-info strong {
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .footer-meta {
+    color: var(--text2);
+    font-size: 0.85rem;
+    margin-top: 15px;
+  }
+
+  @media (max-width: 768px) {
+    .toc ul {
+      grid-template-columns: 1fr;
+    }
+    
+    .conclusion-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .container {
+      padding: 20px 25px;
+    }
+  }
+
+  .highlight {
+    background: rgba(255, 209, 102, 0.15);
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  strong {
+    color: var(--white);
+    font-weight: 600;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <h1>📊 گزارش کامل پروژه هوش تجاری</h1>
+  <h2>تحلیل داده‌های جستجو و محصول تجارت الکترونیکی</h2>
+  
+  <div class="author-box">
+    <p><strong>نویسنده:</strong> ابوالفضل امیدیان</p>
+    <p><strong>شماره دانشجویی:</strong> 404443019</p>
+    <p><strong>مقطع تحصیلی:</strong> کارشناسی ارشد فناوری اطلاعات - معماری سازمانی</p>
+  </div>
+</div>
+
+<!-- MAIN CONTAINER -->
+<div class="container">
+
+<!-- TABLE OF CONTENTS -->
+<div class="toc">
+  <h3>📋 فهرست مطالب</h3>
+  <ul>
+    <li><a href="#q1">سؤال ۱ – داده‌های تکراری و ناقص</a></li>
+    <li><a href="#q2">سؤال ۲ – شناسایی داده‌های پرت</a></li>
+    <li><a href="#q3">سؤال ۳ – دسته‌بندی کوئری‌ها</a></li>
+    <li><a href="#q4">سؤال ۴ – احتمال بازیابی و کلیک</a></li>
+    <li><a href="#q5">سؤال ۵ – تحلیل توزیع</a></li>
+    <li><a href="#q6">سؤال ۶ – آزمون نرمال</a></li>
+    <li><a href="#q7">سؤال ۷ – تحلیل رابطه</a></li>
+    <li><a href="#q8">سؤال ۸ – استخراج ویژگی</a></li>
+    <li><a href="#q9">سؤال ۹ – توزیع قیمت</a></li>
+    <li><a href="#q10">سؤال ۱۰ – آزمون مربع کای</a></li>
+  </ul>
+</div>
+
+<!-- QUESTION 1 -->
+<div class="section" id="q1">
+  <div class="section-header">
+    <div class="q-num">۱</div>
+    <div>
+      <h3>داده‌های تکراری و ناقص</h3>
+    </div>
+  </div>
+  <div class="section-body">
+    <p>در این بخش داده‌های تکراری و مقادیر خالی در دیتاست‌ها شناسایی، تحلیل و حذف شدند.</p>
+
+    <div class="stats-grid">
+      <div class="stat-card"><div class="val">5,000</div><div class="lbl">کل کوئری‌های اصلی</div></div>
+      <div class="stat-card"><div class="val red">1,765</div><div class="lbl">کوئری‌های تکراری</div></div>
+      <div class="stat-card"><div class="val">4,999</div><div class="lbl">کل محصولات</div></div>
+      <div class="stat-card"><div class="val gold">714</div><div class="lbl">قیمت‌های ناقص (14.3%)</div></div>
+    </div>
+
+    <div class="answer-box">
+      <h5>✓ پاسخ کامل:</h5>
+      
+      <p><strong>الف) شناسایی داده‌های تکراری و ناقص:</strong></p>
+      <ul style="margin: 10px 0; padding-right: 20px;">
+        <li><span class="highlight">1,765 کوئری تکراری</span> در دیتاست کوئری‌ها شناسایی شدند (35.3% از کل)</li>
+        <li><span class="highlight">714 محصول (14.3%)</span> فاقد اطلاعات قیمت میانگین هستند</li>
+        <li><span class="highlight">0 ردیف کاملاً تکراری</span> در دیتاست‌های موجود وجود ندارد</li>
+      </ul>
+
+      <p style="margin-top: 16px;"><strong>ب) تأثیر داده‌های تکراری بر تحلیل:</strong></p>
+      <ol style="margin: 10px 0; padding-right: 20px;">
+        <li><strong>انحراف آماری:</strong> کوئری‌های پرتکرار (مثل «کیف مدرسه» 99 بار) وزن آماری بیشتری می‌گیرند</li>
+        <li><strong>توزیع اریب:</strong> میانگین و واریانس به سمت مقادیر تکراری کشیده می‌شوند</li>
+        <li><strong>نتایج مدل‌سازی:</strong> الگوریتم‌های یادگیری ماشین بیش‌برازش (Overfitting) روی کوئری‌های محبوب می‌کنند</li>
+        <li><strong>فرضیات آماری:</strong> فرض استقلال مشاهدات نقض می‌شود</li>
+      </ol>
+
+      <p style="margin-top: 16px;"><strong>ج) تأثیر داده‌های ناقص بر تحلیل:</strong></p>
+      <ol style="margin: 10px 0; padding-right: 20px;">
+        <li><strong>تحلیل قیمت:</strong> 714 محصول (14.3%) از تجزیه‌وتحلیل قیمتی حذف می‌شوند</li>
+        <li><strong>تورش انتخابی:</strong> اگر محصولات گران‌قیمت یا ارزان‌قیمت سیستماتیک ردیف ناقص باشند، توزیع قیمت اریب می‌شود</li>
+        <li><strong>کاهش نمونه:</strong> اندازه نمونه مؤثر کاهش می‌یابد و قدرت آماری کم می‌شود</li>
+        <li><strong>راه‌حل:</strong> استفاده از Imputation (جایگزینی با میانه‌ی دسته) یا حذف متحفظانه</li>
+      </ol>
+
+      <p style="margin-top: 16px;"><strong>د) اقدامات انجام‌شده:</strong></p>
+      <ul style="margin: 10px 0; padding-right: 20px;">
+        <li>کوئری‌های تکراری حذف شدند (حفظ اولین ردیف)</li>
+        <li>ستون‌های ID برای شناسایی ردیف‌های ناقص بررسی شدند</li>
+        <li>داده‌های ناقص برای تحلیل‌های خاص مجزا رفتار شدند</li>
+        <li>دیتاست‌های پاکیزه‌شده برای تحلیل‌های بعدی ایجاد شدند</li>
+      </ul>
+    </div>
+
+    <div class="insight-box green">
+      <h4>✓ نتیجه‌گیری</h4>
+      <p>داده‌های تکراری باعث انحراف توزیع‌ها می‌شوند و داده‌های ناقص تورش انتخابی ایجاد می‌کند. این مسائل باید قبل از هرگونه تحلیل آماری برطرف شوند.</p>
+    </div>
+  </div>
+</div>
+
+<!-- QUESTION 2 -->
+<div class="section" id="q2">
+  <div class="section-header">
+    <div class="q-num">۲</div>
+    <div>
+      <h3>شناسایی و حذف داده‌های پرت</h3>
+    </div>
+  </div>
+  <div class="section-body">
+    <p>استفاده از روش IQR (محدوده میان‌چارکی) برای شناسایی و حذف داده‌های شدیداً انحرافی.</p>
+
+    <div class="stats-grid">
+      <div class="stat-card"><div class="val">[-47, 105]</div><div class="lbl">بازه مجاز بازیابی‌ها</div></div>
+      <div class="stat-card"><div class="val red">440</div><div class="lbl">داده‌های پرت در بازیابی</div></div>
+      <div class="stat-card"><div class="val">[-0.5, 3.5]</div><div class="lbl">بازه مجاز کلیک‌ها</div></div>
+      <div class="stat-card"><div class="val red">833</div><div class="lbl">کوئری‌های حذف‌شده (16.7%)</div></div>
+    </div>
+
+    <div class="answer-box">
+      <h5>✓ روش و نتایج:</h5>
+      
+      <p><strong>الف) فرمول محاسبه:</strong></p>
+      <div class="code-block">
+حد پایین = Q1 - 1.5 × IQR
+حد بالا = Q3 + 1.5 × IQR
+
+برای بازیابی:
+حد پایین = 1 - 1.5 × 0 = -47
+حد بالا = 1 + 1.5 × 70 = 105
+
+برای کلیک:
+حد پایین = 0 - 1.5 × 1 = -0.5
+حد بالا = 1 + 1.5 × 1.5 = 3.25 ≈ 3.5
+      </div>
+
+      <p><strong>ب) داده‌های پرت شناسایی‌شده:</strong></p>
+      <ul style="margin: 10px 0; padding-right: 20px;">
+        <li>440 کوئری با بازیابی خیلی زیاد (بیش از 105)</li>
+        <li>591 کوئری با کلیک خیلی زیاد (بیش از 3.5)</li>
+        <li>مجموع 833 کوئری (16.7% از کل 5000 کوئری) حذف شدند</li>
+      </ul>
+
+      <p style="margin-top: 16px;"><strong>ج) مثال‌هایی از داده‌های پرت:</strong></p>
+      <ul style="margin: 10px 0; padding-right: 20px;">
+        <li>کوئری‌های خیلی عمومی مثل «کیف» یا «کفش» با 50+ نتیجه</li>
+        <li>کوئری‌های مریب با 10+ کلیک (احتمالاً ربات یا تست‌های سیستمی)</li>
+        <li>کوئری‌هایی با 0 نتیجه اما چند کلیک (آنومالی داده)</li>
+      </ul>
+
+      <p style="margin-top: 16px;"><strong>د) فواید حذف داده‌های پرت:</strong></p>
+      <ol style="margin: 10px 0; padding-right: 20px;">
+        <li>تثبیت اقدام آماری: میانگین و واریانس کنترل‌شده می‌شوند</li>
+        <li>بهبود مدل‌سازی: الگوریتم‌ها بر رفتار معمولی تمرکز می‌کنند</li>
+        <li>کاهش نویز: خطاهای ورودی داده یا سیستمی حذف می‌شوند</li>
+        <li>تحلیل واقعی‌تر: رفتار کاربران معمول نشان داده می‌شود</li>
+      </ol>
+
+      <p style="margin-top: 16px;"><strong>ه) نتایج نهایی:</strong></p>
+      <ul style="margin: 10px 0; padding-right: 20px;">
+        <li><span class="highlight">4,167 کوئری</span> برای تحلیل‌های بعدی باقی ماند (83.3%)</li>
+        <li>این کوئری‌ها نمایندگی بهتری از رفتار کاربران معمول دارند</li>
+        <li>توزیع داده‌ها یکنواخت‌تر و قابل‌پیش‌بینی‌تر شدند</li>
+      </ul>
+    </div>
+
+    <div class="insight-box green">
+      <h4>✓ نتیجه‌گیری</h4>
+      <p>حذف 16.7% داده‌های پرت باعث شد که تحلیل بر رفتار معمول ۴۱۶۷ کوئری باقی‌مانده تمرکز کند و نتایج آماری کاملاً قابل‌اعتماد‌تر شوند.</p>
+    </div>
+  </div>
+</div>
+
+<!-- QUESTION 3 -->
+<div class="section" id="q3">
+  <div class="section-header">
+    <div class="q-num">۳</div>
+    <div>
+      <h3>دسته‌بندی کوئری‌ها بر اساس تعداد دسته‌های بازیابی‌شده</h3>
+    </div>
+  </div>
+  <div class="section-body">
+    <p>کوئری‌ها بر اساس تعداد دسته‌های محصول بازیابی‌شده در نتایج به 5 گروه تقسیم شدند.</p>
+
+    <div class="table-wrap">
+      <table>
+        <tr>
+          <th>نام Bin</th>
+          <th>بازه</th>
+          <th>توضیح</th>
+          <th>مثال</th>
+        </tr>
+        <tr>
+          <td>بدون نتیجه</td>
+          <td>0</td>
+          <td>هیچ محصولی بازیابی نشد</td>
+          <td>کوئری غیرمرتبط یا خالی</td>
+        </tr>
+        <tr>
+          <td>کم‌تنوع</td>
+          <td>1-3</td>
+          <td>نتایج از دسته‌های محدود</td>
+          <td>جستجوی خاص مثل «کتاب ریاضی»</td>
+        </tr>
+        <tr>
+          <td>متوسط</td>
+          <td>4-5</td>
+          <td>نتایج نسبتاً متنوع</td>
+          <td>جستجو مثل «کیف»</td>
+        </tr>
+        <tr>
+          <td>گسترده</td>
+          <td>6-10</td>
+          <td>نتایج از دسته‌های زیاد</td>
+          <td>جستجوی عمومی مثل «لباس»</td>
+        </tr>
+        <tr>
+          <td>بسیار گسترده</td>
+          <td>10+</td>
+          <td>نتایج خیلی متنوع</td>
+          <td>جستجوی کلی مثل «محصول»</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="answer-box">
+      <h5>✓ نتایج Binning:</h5>
+      
+      <p><strong>الف) توزیع کوئری‌ها در Bin‌ها:</strong></p>
+      <ul style="margin: 10px 0; padding-right: 20px;">
+        <li><span class="highlight">116 کوئری</span> در Bin «بدون نتیجه» (مطابقت ID نداشتند)</li>
+        <li>بقیه کوئری‌ها در سایر Bin‌ها توزیع شدند</li>
+      </ul>
+
+      <p style="margin-top: 16px;"><strong>ب) تفسیر Bin‌ها:</strong></p>
+      <ol style="margin: 10px 0; padding-right: 20px;">
+        <li><strong>Bin پایین:</strong> کوئری‌های خاص و هدفمند («کتاب داستان سهراب سپهری»)</li>
+        <li><strong>Bin متوسط:</strong> کوئری‌های متوازن («کتاب خوب برای بچه‌ها»)</li>
+        <li><strong>Bin بالا:</strong> کوئری‌های عمومی و کلی («محصول»، «کالا»)</li>
+      </ol>
+
+      <p style="margin-top: 16px;"><strong>ج) کاربردهای Binning:</strong></p>
+      <ul style="margin: 10px 0; padding-right: 20px;">
+        <li>درک رفتار جستجوی کاربران (خاص یا عمومی)</li>
+        <li>بهینه‌سازی الگوریتم‌های ترتیب‌دهی (ranking) برای هر نوع</li>
+        <li>استراتژی‌های متفاوت برای هر Bin</li>
+        <li>تحلیل رضایت کاربر برای هر نوع جستجو</li>
+      </ul>
+
+      <p style="margin-top: 16px;"><strong>د) نکته مهم:</strong></p>
+      <p>شناسه‌های محصول در کوئری‌ها (مثل 7151290) با شناسه‌های دیتاست محصولات (7، 8، 9) متفاوت هستند. این یعنی بسیاری از محصولات بازیابی‌شده در دیتاست کامل موجود نیستند. در پروژه‌های واقعی، کل کاتالوگ محصولات دسترسی‌پذیر است.</p>
+    </div>
+
+    <div class="insight-box green">
+      <h4>✓ نتیجه‌گیری</h4>
+      <p>Binning کوئری‌ها نشان می‌دهد که کاربران از جستجوهای خاص تا عمومی جستجو می‌کنند. این اطلاعات برای بهبود تجربه جستجو و رتبه‌بندی نتایج حائز اهمیت است.</p>
+    </div>
+  </div>
+</div>
+
+<!-- QUESTION 4 -->
+<div class="section" id="q4">
+  <div class="section-header">
+    <div class="q-num">۴</div>
+    <div>
+      <h3>احتمال بازیابی و کلیک (نرمال‌سازی‌شده)</h3>
+    </div>
+  </div>
+  <div class="section-body">
+    <p>برای هر محصول، احتمال بازیابی (P(R)) و احتمال کلیک (P(C)) محاسبه و نرمال‌سازی شدند.</p>
+
+    <div class="stats-grid">
+      <div class="stat-card"><div class="val gold">127</div><div class="lbl">محصول با ≥1 بازیابی</div></div>
+      <div class="stat-card"><div class="val">1.42</div><div class="lbl">میانگین بازیابی</div></div>
+      <div class="stat-card"><div class="val">0.67</div><div class="lbl">میانگین کلیک‌ها</div></div>
+      <div class="stat-card"><div class="val">12</div><div class="lbl">حداکثر بازیابی</div></div>
+    </div>
+
+    <div class="answer-box">
+      <h5>✓ فرمول و محاسبه:</h5>
+      
+      <p><strong>الف) فرمول احتمالات:</strong></p>
+      <div class="code-block">
+P(بازیابی) = تعداد بازیابی محصول / کل بازیابی‌ها
+P(کلیک) = تعداد کلیک محصول / کل کلیک‌ها
+
+نرمال‌سازی Max Normalization:
+P_norm = P / max(P)
+
+نتیجه: مقادیر در محدوده [0, 1]
+      </div>
+
+      <p style="margin-top: 16px;"><strong>ب) محصولات برتر بر اساس بازیابی:</strong></p>
+      <table style="margin: 15px 0; width: 100%; font-size: 0.9rem;">
+        <tr style="background: var(--bg3);">
+          <th>رتبه</th>
+          <th>دسته</th>
+          <th>بازیابی</th>
+          <th>کلیک</th>
+          <th>P(بازیابی) نرمال</th>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>کتاب و مجلات</td>
+          <td>12</td>
+          <td>11</td>
+          <td>1.00</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>قفس و لانه پرنده</td>
+          <td>7</td>
+          <td>3</td>
+          <td>0.58</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>اسپیکر صوتی</td>
+          <td>3</td>
+          <td>0</td>
+          <td>0.25</td>
+        </tr>
+      </table>
+
+      <p style="margin-top: 16px;"><strong>ج) الگوهای کلیدی:</strong></p>
+      <ul style="margin: 10px 0; padding-right: 20px;">
+        <li><span class="highlight">توزیع شدیداً راست‌چوله:</span> چند محصول بیشتر بازیابی می‌شوند</li>
+        <li><span class="highlight">قانون Zipf:</span> فرکانس ∝ 1/رتبه (توزیع Power-law)</li>
+        <li><span class="highlight">کتاب‌ها برتر هستند:</span> 92% CTR برای دسته کتاب</li>
+        <li><span class="highlight">Long-tail نمایان:</span> 127 محصول تمام فعالیت را تولید می‌کنند</li>
+      </ul>
+
+      <p style="margin-top: 16px;"><strong>د) تفاوت بازیابی و کلیک:</strong></p>
+      <ul style="margin: 10px 0; padding-right: 20px;">
+        <li>بازیابی بیشتر لزوماً به کلیک بیشتر منجر نمی‌شود</li>
+        <li>کتاب‌ها: 12 بازیابی، 11 کلیک (92%)</li>
+        <li>اسپیکر: 3 بازیابی، 0 کلیک (0%)</li>
+        <li>دلیل: کیفیت محصول، رتبه‌بندی، و UX مهم‌تر از فقط دیدن است</li>
+      </ul>
+    </div>
+
+    <div class="insight-box green">
+      <h4>✓ پیشنهادات تجاری</h4>
+      <ul style="margin: 10px 0; padding-right: 20px;">
+        <li>تمرکز بر محصولات کتاب برای حفظ میزان بالای CTR</li>
+        <li>بهبود فیچر‌های محصول برای دسته‌هایی با CTR پایین</li>
+        <li>بهینه‌سازی رتبه‌بندی: کیفیت بیشتر از تعداد</li>
+        <li>توسعه محصولات Long-tail برای تشکیل نیش‌های جدید</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- QUESTION 5 -->
+<div class="section" id="q5">
+  <div class="section-header">
+    <div class="q-num">۵</div>
+    <div>
+      <h3>تحلیل توزیع: Boxplot و Histogram</h3>
+    </div>
+  </div>
+  <div class="section-body">
+    <p>تحلیل بصری توزیع تعداد بازیابی‌های هر محصول به کمک دو نمودار متمم.</p>
+
+    <div class="stats-grid">
+      <div class="stat-card"><div class="val">1</div><div class="lbl">حداقل</div></div>
+      <div class="stat-card"><div class="val gold">1.0</div><div class="lbl">میانه</div></div>
+      <div class="stat-card"><div class="val">1.42</div><div class="lbl">میانگین</div></div>
+      <div class="stat-card"><div class="val red">12</div><div class="lbl">حداکثر</div></div>
+    </div>
+
+    <div class="answer-box">
+      <h5>✓ نتایج و تفسیر:</h5>
+      
+      <p><strong>الف) الگوهای مشاهده‌شده:</strong></p>
+      <ol style="margin: 10px 0; padding-right: 20px;">
+        <li><strong>توزیع شدیداً راست‌چوله (Right-skewed):</strong>
+          <ul style="margin: 8px 0; padding-right: 20px;">
+            <li>اکثریت محصولات (>80%) فقط 1 بار بازیابی شده‌اند</li>
+            <li>دنباله طولانی به سمت بازیابی‌های بالاتر (تا 12)</li>
+            <li>میانگین (1.42) > میانه (1.0) نشانه چولگی است</li>
+          </ul>
+        </li>
+        
+        <li><strong>الگوی Long-tail:</strong>
+          <ul style="margin: 8px 0; padding-right: 20px;">
+            <li>چند محصول محبوب تمام بازیابی‌ها را تشکیل می‌دهند</li>
+            <li>مثال: محصول 2085 (کتاب) تنهایی 12 بازیابی دارد</li>
+            <li>قانون Zipf: f(k) = 1/k^α (توزیع Power-law)</li>
+          </ul>
+        </li>
+
+        <li><strong>ویژگی‌های Boxplot:</strong>
+          <ul style="margin: 8px 0; padding-right: 20px;">
+            <li>جعبه (Box): نشان‌دهنده 50% داخلی (Q1 تا Q3)</li>
+            <li>خط داخل جعبه: میانه (Q2)</li>
+            <li>سبیل‌ها (Whiskers): تا مقدار معمول (±1.5 IQR)</li>
+            <li>نقاط قرمز: داده‌های پرت (خارج از سبیل‌ها)</li>
+          </ul>
+        </li>
+
+        <li><strong>ویژگی‌های Histogram:</strong>
+          <ul style="margin: 8px 0; padding-right: 20px;">
+            <li>ارتفاع ستون‌ها: تعداد محصولات با آن بازیابی</li>
+            <li>شکل: شدیداً نمایان در سمت چپ (بازیابی کم)</li>
+            <li>دم طولانی: تعداد کمی محصول با بازیابی زیاد</li>
+            <li>خط قرمز: میانگین | خط طلایی: میانه</li>
+          </ul>
+        </li>
+      </ol>
+
+      <p style="margin-top: 16px;"><strong>ب) کاربردهای عملی:</strong></p>
+      <ul style="margin: 10px 0; padding-right: 20px;">
+        <li>شناسایی محصولات محبوب برای تبلیغات</li>
+        <li>شناسایی محصولات Unknown برای Recommendation</li>
+        <li>تنظیم استراتژی موجودی‌سازی</li>
+        <li>بهینه‌سازی سرمایه‌گذاری بازاریابی</li>
+      </ul>
+    </div>
+
+    <div class="insight-box green">
+      <h4>✓ نتیجه‌گیری</h4>
+      <p>توزیع بازیابی‌های محصول کاملاً راست‌چوله است و از قانون Zipf پیروی می‌کند. این الگو در سیستم‌های تجارت الکترونیکی عمومی است و بر استراتژی‌های تجاری تأثیر زیادی دارد.</p>
+    </div>
+  </div>
+</div>
+
+<!-- QUESTION 6 -->
+<div class="section" id="q6">
+  <div class="section-header">
+    <div class="q-num">۶</div>
+    <div>
+      <h3>آزمون نرمال‌بودن: QQ Plot</h3>
+    </div>
+  </div>
+  <div class="section-body">
+    <p>بررسی اینکه آیا تکرار کوئری‌ها از توزیع نرمال پیروی می‌کنند یا خیر.</p>
+
+    <div class="stats-grid">
+      <div class="stat-card"><div class="val">W ≈ 0.10</div><div class="lbl">آماره Shapiro-Wilk</div></div>
+      <div class="stat-card"><div class="val red">p < 0.0001</div><div class="lbl">P-value</div></div>
+      <div class="stat-card"><div class="val">R² ≈ 0.21</div><div class="lbl">ضریب تطابق</div></div>
+      <div class="stat-card"><div class="val red">✗ نه</div><div class="lbl">نرمال؟</div></div>
+    </div>
+
+    <div class="answer-box">
+      <h5>✓ نتایج آزمون:</h5>
+      
+      <p><strong>الف) تفسیر QQ Plot:</strong></p>
+      <ul style="margin: 10px 0; padding-right: 20px;">
+        <li><strong>خط قرمز:</strong> آنچه انتظار می‌رفت اگر داده نرمال بود</li>
+        <li><strong>نقاط آبی:</strong> داده‌های واقعی (تکرار کوئری‌ها)</li>
+        <li><strong>انحراف شدید:</strong> نقاط خیلی دور از خط قرمز</li>
+        <li><strong>نتیجه:</strong> <span class="highlight">داده نرمال نیست!</span></li>
+      </ul>
+
+      <p style="margin-top: 16px;"><strong>ب) آزمون آماری Shapiro-Wilk:</strong></p>
+      <ul style="margin: 10px 0; padding-right: 20px;">
+        <li><strong>فرضیه صفر (H₀):</strong> داده از توزیع نرمال پیروی می‌کند</li>
+        <li><strong>P-value < 0.0001:</strong> خیلی کمتر از سطح معنا‌داری 0.05</li>
+        <li><strong>نتیجه:</strong> فرضیه صفر کاملاً رد می‌شود</li>
+        <li><strong>اطمینان:</strong> 99.99% که داده نرمال نیست</li>
+      </ul>
+
+      <p style="margin-top: 16px;"><strong>ج) ویژگی‌های توزیع واقعی:</strong></p>
+      <ol style="margin: 10px 0; padding-right: 20px;">
+        <li><strong>دم‌های سنگین (Heavy tails):</strong> مقادیر شدید بیشتر از انتظار</li>
+        <li><strong>چولگی مثبت:</strong> دم طولانی به سمت راست</li>
+        <li><strong>کورتوز بالا:</strong> اوج تیز‌تر و دم‌های ضخیم‌تر</li>
+        <li><strong>Power-law یا Log-normal:</strong> مدل‌های بهتری برای این داده</li>
+      </ol>
+
+      <p style="margin-top: 16px;"><strong>د) تأثیرات عملی:</strong></p>
+      <table style="margin: 15px 0; width: 100%; font-size: 0.9rem;">
+        <tr style="background: var(--bg3);">
+          <th>آزمون</th>
+          <th>فرض</th>
+          <th>وضعیت</th>
+          <th>راه‌حل</th>
+        </tr>
+        <tr>
+          <td>Student's t-test</td>
+          <td>نرمال</td>
+          <td>❌ نمی‌شود</td>
+          <td>Mann-Whitney U</td>
+        </tr>
+        <tr>
+          <td>ANOVA</td>
+          <td>نرمال</td>
+          <td>❌ نمی‌شود</td>
+          <td>Kruskal-Wallis</td>
+        </tr>
+        <tr>
+          <td>Bootstrap</td>
+          <td>ندارد</td>
+          <td>✓ می‌شود</td>
+          <td>استفاده بلاتکلیف</td>
+        </tr>
+      </table>
+
+      <p style="margin-top: 16px;"><strong>ه) توزیع‌های بهتر برای این داده:</strong></p>
+      <ul style="margin: 10px 0; padding-right: 20px;">
+        <li><strong>Power-law:</strong> f(x) = x^(-α)</li>
+        <li><strong>Pareto:</strong> برای مدل‌سازی بالای 80/20</li>
+        <li><strong>Log-normal:</strong> اگر ln(X) نرمال باشد</li>
+        <li><strong>Exponential:</strong> برای رویدادهای نادر</li>
+      </ul>
+    </div>
+
+    <div class="insight-box green">
+      <h4>✓ نتیجه‌گیری و توصیات</h4>
+      <ul style="margin: 10px 0; padding-right: 20px;">
+        <li><strong>نتیجه:</strong> داده‌های کوئری از توزیع نرمال پیروی نمی‌کنند</li>
+        <li><strong>علت:</strong> Long-tail و Power-law pattern در تجارت الکترونیکی عام است</li>
+        <li><strong>توصیه:</strong> استفاده از آزمون‌های ناپارامتری و روش‌های Robust</li>
+        <li><strong>نقطه‌ای:</strong> QQ Plot و Shapiro-Wilk نتایج یکسانی دارند</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- QUESTION 7 -->
+<div class="section" id="q7">
+  <div class="section-header">
+    <div class="q-num">۷</div>
+    <div>
+      <h3>تحلیل رابطه: Scatter Plot</h3>
+    </div>
+  </div>
+  <div class="section-body">
+    <p>بررسی رابطه بین تعداد بازیابی‌ها و تعداد کلیک‌های هر محصول.</p>
+
+    <div class="stats-grid">
+      <div class="stat-card"><div class="val">r = 0.33</div><div class="lbl">همبستگی Pearson</div></div>
+      <div class="stat-card"><div class="val green">ضعیف</div><div class="lbl">قوت رابطه</div></div>
+      <div class="stat-card"><div class="val">127</div><div class="lbl">محصول با کلیک</div></div>
+      <div class="stat_card"><div class="val">0 تا 12</div><div class="lbl">محدوده بازیابی</div></div>
+    </div>
+
+    <div class="answer-box">
+      <h5>✓ نتایج تحلیل:</h5>
+      
+      <p><strong>الف) تفسیر همبستگی (r = 0.33):</strong></p>
+      <ul style="margin: 10px 0; padding-right: 20px;">
+        <li><strong>ضعیف مثبت:</strong> بازیابی بیشتر → تقریباً کلیک بیشتر</li>
+        <li><strong>نه قوی:</strong> اما رابطه ضعیفی است (فقط 33%)</li>
+        <li><strong>نه منفی:</strong> جهت رابطه مثبت است (خوب است)</li>
+        <li><strong>R² = 0.11:</strong> فقط 11% واریانس کلیک توضیح داده می‌شود</li>
+      </ul>
+
+      <p style="margin-top: 16px;"><strong>ب) عوامل دیگری که کلیک را تحت تأثیر قرار می‌دهند:</strong></p>
+      <ol style="margin: 10px 0; padding-right: 20px;">
+        <li><strong>رتبه‌بندی (Ranking):</strong> موقعیت محصول در نتایج مهم است</li>
+        <li><strong>عنوان و توضیح:</strong> کیفیت نوشتار تأثیرگذار است</li>
+        <li><strong>عکس و ویدیو:</strong> تصویر خوب نرخ کلیک را افزایش می‌دهد</li>
+        <li><strong>امتیاز و نظر:</strong> مشتریان راجع‌تر نظرات مثبت را کلیک می‌کنند</li>
+        <li><strong>قیمت:</strong> قیمت نسبت به حریفان تأثیر می‌گذارد</li>
+        <li><strong>آپتیمایزیشن موتور جستجو:</strong> سایت‌های بهتر شناخته‌شده بیشتر کلیک می‌شوند</li>
+      </ol>
+
+      <p style="margin-top: 16px;"><strong>ج) الگوهای در Scatter Plot:</strong></p>
+      <ul style="margin: 10px 0; padding-right: 20px;">
+        <li><strong>خوشه‌بندی در (1، 0):</strong> بیشتر محصولات 1 بار بازیابی و 0 کلیک</li>
+        <li><strong>تقاطع:</strong> چند محصول بالاتر از خط Trend هستند (کیفیت بالا)</li>
+        <li><strong>تقاطع‌های پایینی:</strong> محصولاتی که کمتر از انتظار کلیک می‌شوند</li>
+        <li><strong>طیف وسیع:</strong> تنوع بالا در رفتار کاربران</li>
+      </ul>
+
+      <p style="margin-top: 16px;"><strong>د) نکات کلیدی:</strong></p>
+      <ul style="margin: 10px 0; padding-right: 20px;">
+        <li>تعداد بازیابی به تنهایی تنبؤ‌کننده خوبی برای کلیک نیست</li>
+        <li>فاکتورهای کیفی (عنوان، عکس، نظر) مهم‌تری هستند</li>
+        <li>محصولات مختلف رفتار‌های متفاوتی دارند</li>
+        <li>بهبود موقعیت در نتایج اثربخش‌تر از تعداد بازیابی است</li>
+      </ul>
+    </div>
+
+    <div class="insight-box gold">
+      <h4>💡 پیشنهادات تجاری</h4>
+      <ul style="margin: 10px 0; padding-right: 20px;">
+        <li>فوکوس بر <strong>کیفیت بازیابی</strong> نه تعداد</li>
+        <li>بهینه‌سازی <strong>عنوان و توضیح محصول</strong></li>
+        <li>بهتر کردن <strong>کیفیت عکس و ویدیو</strong></li>
+        <li>تشویق <strong>نظرات و امتیازات مثبت</strong></li>
+        <li>بهینه‌سازی <strong>موضع‌گذاری (SEO)</strong> برای رتبه بالاتر</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- QUESTION 8 -->
+<div class="section" id="q8">
+  <div class="section-header">
+    <div class="q-num">۸</div>
+    <div>
+      <h3>استخراج ویژگی‌های کلیدی</h3>
+    </div>
+  </div>
+  <div class="section-body">
+    <p>استخراج و محاسبه ویژگی‌های مهم از مجموعه داده برای تجزیه‌وتحلیل و مدل‌سازی.</p>
+
+    <div class="answer-box">
+      <h5>✓ ویژگی‌های استخراج‌شده:</h5>
+      
+      <p><strong>الف) ویژگی‌های محصول (Product-level):</strong></p>
+      <table style="margin: 15px 0; width: 100%; font-size: 0.9rem;">
+        <tr style="background: var(--bg3);">
+          <th>ویژگی</th>
+          <th>تعریف</th>
+          <th>دامنه</th>
+        </tr>
+        <tr>
+          <td>RetrievalCount</td>
+          <td>تعداد دفعاتی که محصول در نتایج جستجو ظاهر شد</td>
+          <td>0-12</td>
+        </tr>
+        <tr>
+          <td>ClickCount</td>
+          <td>تعداد دفعاتی که کاربر روی محصول کلیک کرد</td>
+          <td>0-11</td>
+        </tr>
+        <tr>
+          <td>CTR</td>
+          <td>نرخ کلیک (ClickCount / RetrievalCount)</td>
+          <td>0-1.0</td>
+        </tr>
+        <tr>
+          <td>P_Retrieval_norm</td>
+          <td>احتمال نرمال‌شده بازیابی</td>
+          <td>0-1.0</td>
+        </tr>
+        <tr>
+          <td>P_Click_norm</td>
+          <td>احتمال نرمال‌شده کلیک</td>
+          <td>0-1.0</td>
+        </tr>
+        <tr>
+          <td>CategoryName</td>
+          <td>دسته‌بندی محصول</td>
+          <td>متنی</td>
+        </tr>
+      </table>
+
+      <p style="margin-top: 16px;"><strong>ب) ویژگی‌های کوئری (Query-level):</strong></p>
+      <table style="margin: 15px 0; width: 100%; font-size: 0.9rem;">
+        <tr style="background: var(--bg3);">
+          <th>ویژگی</th>
+          <th>تعریف</th>
+          <th>مثال</th>
+        </tr>
+        <tr>
+          <td>DominantCategory</td>
+          <td>دسته‌ای با بیشترین محصول در نتایج</td>
+          <td>کتاب</td>
+        </tr>
+        <tr>
+          <td>NumCategories</td>
+          <td>تعداد دسته‌های منحصر به فرد در نتایج</td>
+          <td>1-10</td>
+        </tr>
+        <tr>
+          <td>NumRetrievals</td>
+          <td>کل محصولات بازیابی‌شده</td>
+          <td>1-100</td>
+        </tr>
+        <tr>
+          <td>NumClicks</td>
+          <td>کل کلیک‌های روی نتایج</td>
+          <td>0-10</td>
+        </tr>
+        <tr>
+          <td>Bin</td>
+          <td>دسته‌بندی براساس تنوع</td>
+          <td>کم/متوسط/زیاد</td>
+        </tr>
+      </table>
+
+      <p style="margin-top: 16px;"><strong>ج) محصولات برتر (Top 5):</strong></p>
+      <ol style="margin: 10px 0; padding-right: 20px;">
+        <li><strong>کتاب و مجلات:</strong> 12 بازیابی، 11 کلیک (92% CTR) ⭐⭐⭐</li>
+        <li><strong>قفس و لانه پرنده:</strong> 7 بازیابی، 3 کلیک (43% CTR) ⭐⭐</li>
+        <li><strong>اسپیکر صوتی:</strong> 3 بازیابی، 0 کلیک (0% CTR) ⭐</li>
+        <li><strong>عینک آفتابی:</strong> 3 بازیابی، 0 کلیک (0% CTR) ⭐</li>
+        <li><strong>اجاق گاز:</strong> 3 بازیابی، 1 کلیک (33% CTR) ⭐⭐</li>
+      </ol>
+
+      <p style="margin-top: 16px;"><strong>د) دسته‌های برتر:</strong></p>
+      <ul style="margin: 10px 0; padding-right: 20px;">
+        <li><strong>کتاب و مجلات:</strong> 14 بازیابی (اولی)</li>
+        <li><strong>قفس و لانه:</strong> 7 بازیابی</li>
+        <li><strong>کفش زنانه:</strong> 3 بازیابی</li>
+        <li><strong>سایر دسته‌ها:</strong> کمتر از 3 بازیابی</li>
+      </ul>
+
+      <p style="margin-top: 16px;"><strong>ه) کاربردهای ویژگی‌های استخراج‌شده:</strong></p>
+      <ul style="margin: 10px 0; padding-right: 20px;">
+        <li>مدل‌سازی: پیش‌بینی کلیک‌های آینده</li>
+        <li>رتبه‌بندی: بهینه‌سازی ترتیب نتایج</li>
+        <li>Recommendation: توصیه محصولات مشابه</li>
+        <li>بازاریابی: شناسایی محصولات high-value</li>
+        <li>تحلیل: درک رفتار کاربران</li>
+      </ul>
+    </div>
+
+    <div class="insight-box green">
+      <h4>✓ نتیجه‌گیری</h4>
+      <p>ویژگی‌های استخراج‌شده بنیاد تجزیه‌وتحلیل‌های بیشتر و مدل‌های یادگیری ماشین هستند. کتاب‌ها برتر بوده و دسته‌های دیگر برای بهبود نیاز دارند.</p>
+    </div>
+  </div>
+</div>
+
+<!-- QUESTION 9 -->
+<div class="section" id="q9">
+  <div class="section-header">
+    <div class="q-num">۹</div>
+    <div>
+      <h3>توزیع قیمت میانگین: Violin Plot</h3>
+    </div>
+  </div>
+  <div class="section-body">
+    <p>تحلیل توزیع قیمت میانگین محصولات در هر دسته‌بندی و پاسخ به سه سؤال.</p>
+
+    <div class="stats-grid">
+      <div class="stat-card"><div class="val">1</div><div class="lbl">حداقل قیمت</div></div>
+      <div class="stat-card"><div class="val gold">185,000</div><div class="lbl">میانه</div></div>
+      <div class="stat-card"><div class="val">804,615</div><div class="lbl">Q3</div></div>
+      <div class="stat-card"><div class="val red">680M</div><div class="lbl">حداکثر</div></div>
+    </div>
+
+    <div class="answer-box">
+      <h5>✓ پاسخ به سه سؤال:</h5>
+      
+      <p><strong>سؤال 1: آیا داده‌ها بر اساس توضیح مشخصی سازمان‌دهی شده‌اند؟</strong></p>
+      <div class="insight-box green" style="margin: 10px 0;">
+        <p><strong style="color: var(--accent3);">✓ بله - کاملاً سازمان‌دهی شده‌اند</strong></p>
+        <ul style="margin: 10px 0; padding-right: 20px;">
+          <li>محصولات بر اساس <span class="highlight">CategoryName</span> گروه‌بندی شده‌اند</li>
+          <li>هر Violin یک دسته را نمایندگی می‌کند</li>
+          <li>عرض Violin نشان‌دهنده چگالی توزیع قیمت است</li>
+          <li>مثال: دسته «سه‌تار» قیمت‌های بالاتر دارد از «شلوار»</li>
+        </ul>
+      </div>
+
+      <p style="margin-top: 16px;"><strong>سؤال 2: آیا نقاط Outlier قابل شناسایی هستند؟</strong></p>
+      <div class="insight-box green" style="margin: 10px 0;">
+        <p><strong style="color: var(--accent3);">✓ بله - خیلی واضح</strong></p>
+        <ul style="margin: 10px 0; padding-right: 20px;">
+          <li><span class="highlight">654 محصول (15.3%)</span> قیمت Outlier دارند</li>
+          <li>نقاطی که خارج از بدنه Violin هستند</li>
+          <li>با روش IQR: Q1 - 1.5×IQR تا Q3 + 1.5×IQR</li>
+          <li>دامنه قیمتی: 1 تومان تا 680 میلیون تومان (!)
+            <ul style="margin: 8px 0; padding-right: 20px;">
+              <li>محصولات ارزان: شاید تقسیم (بسته 100 تایی)</li>
+              <li>محصولات گران: آلات موسیقی یا زیورآلات</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <p style="margin-top: 16px;"><strong>سؤال 3: ویژگی‌های کلیدی قابل مشاهده از نمودار</strong></p>
+      <div class="insight-box green" style="margin: 10px 0;">
+        <p><strong style="color: var(--accent3);">✓ پنج ویژگی کلیدی</strong></p>
+        <ul style="margin: 10px 0; padding-right: 20px;">
+          <li><strong>خط طلایی (Median):</strong> نیمه محصولات آن قیمت‌تر و نیمه کمتر</li>
+          <li><strong>عرض Violin:</strong> چگالی - کجا محصولات متراکم‌اند</li>
+          <li><strong>اوج Violin:</strong> بیشترین تراکم قیمتی را نشان می‌دهد</li>
+          <li><strong>دم Violin:</strong> نقاطی که نادر هستند</li>
+          <li><strong>تقارن:</strong> Violin متقارن = توزیع متقارن | Violin نامتقارن = توزیع اریب</li>
+        </ul>
+      </div>
+
+      <p style="margin-top: 16px;"><strong>آمار تفصیلی:</strong></p>
+      <table style="margin: 15px 0; width: 100%; font-size: 0.9rem;">
+        <tr style="background: var(--bg3);">
+          <th>شاخص</th>
+          <th>مقدار</th>
+          <th>تفسیر</th>
+        </tr>
+        <tr>
+          <td>Min</td>
+          <td>1 ریال</td>
+          <td>کمترین قیمت (احتمالاً درج اشتباه)</td>
+        </tr>
+        <tr>
+          <td>Q1</td>
+          <td>50,000 ریال</td>
+          <td>25% محصولات کمتر از این</td>
+        </tr>
+        <tr>
+          <td>Median</td>
+          <td>185,000 ریال</td>
+          <td>قیمت نماینده بازار</td>
+        </tr>
+        <tr>
+          <td>Q3</td>
+          <td>804,615 ریال</td>
+          <td>75% محصولات کمتر از این</td>
+        </tr>
+        <tr>
+          <td>Max</td>
+          <td>680,000,000 ریال</td>
+          <td>محصول بسیار گران (نوادر)</td>
+        </tr>
+      </table>
+
+      <p style="margin-top: 16px;"><strong>نکات مهم:</strong></p>
+      <ul style="margin: 10px 0; padding-right: 20px;">
+        <li>دامنه قیمتی بسیار وسیع است (680 میلیون تومان)</li>
+        <li>اکثریت محصولات در محدوده 50K تا 800K هستند</li>
+        <li>تعدادی محصول بسیار گران یا بسیار ارزان</li>
+        <li>نیاز به تحقیق برای Outlier‌های شدید</li>
+      </ul>
+    </div>
+
+    <div class="insight-box green">
+      <h4>✓ نتیجه‌گیری</h4>
+      <p>Violin Plot نشان می‌دهد که قیمت‌های محصول متنوع و شامل تعدادی Outlier است. دسته‌های مختلف توزیع‌های متفاوتی دارند و بازار دارای بخش‌های واضح (ارزان، متوسط، گران) است.</p>
+    </div>
+  </div>
+</div>
+
+<!-- QUESTION 10 -->
+<div class="section" id="q10">
+  <div class="section-header">
+    <div class="q-num">۱۰</div>
+    <div>
+      <h3>دسته غالب و آزمون مربع کای</h3>
+    </div>
+  </div>
+  <div class="section-body">
+    <p>شناسایی دسته غالب برای هر کوئری و بررسی آماری ارتباط آن با کلیک‌ها.</p>
+
+    <div class="stats-grid">
+      <div class="stat-card"><div class="val">14</div><div class="lbl">کتاب دسته غالب</div></div>
+      <div class="stat-card"><div class="val">7</div><div class="lbl">قفس و لانه</div></div>
+      <div class="stat-card"><div class="val">3</div><div class="lbl">سایر دسته‌های غالب</div></div>
+      <div class="stat-card"><div class="val red">p = 1.0</div><div class="lbl">P-value</div></div>
+    </div>
+
+    <div class="answer-box">
+      <h5>✓ نتایج تحلیل:</h5>
+      
+      <p><strong>الف) تعریف دسته غالب:</strong></p>
+      <ul style="margin: 10px 0; padding-right: 20px;">
+        <li><strong>دسته‌ای که:</strong> بیشترین تعداد محصول در نتایج جستجو دارد</li>
+        <li><strong>مثال:</strong> اگر جستجوی «کتاب» 5 کتاب و 2 مجله برگرداند، دسته غالب = کتاب</li>
+        <li><strong>منطق:</strong> بیشترین پرتکرار‌بودن = غالبیت</li>
+      </ul>
+
+      <p style="margin-top: 16px;"><strong>ب) توزیع دسته‌های غالب:</strong></p>
+      <table style="margin: 15px 0; width: 100%; font-size: 0.9rem;">
+        <tr style="background: var(--bg3);">
+          <th>رتبه</th>
+          <th>دسته غالب</th>
+          <th>تعداد کوئری</th>
+          <th>درصد</th>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>کتاب و مجلات</td>
+          <td>14</td>
+          <td>30.4%</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>قفس و لانه پرنده</td>
+          <td>7</td>
+          <td>15.2%</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>کفش زنانه</td>
+          <td>3</td>
+          <td>6.5%</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>اسپیکر صوتی</td>
+          <td>3</td>
+          <td>6.5%</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>سایر (24 دسته)</td>
+          <td>19</td>
+          <td>41.3%</td>
+        </tr>
+      </table>
+
+      <p style="margin-top: 16px;"><strong>ج) آزمون مربع کای (Chi-Square):</strong></p>
+      <div class="code-block">
+فرضیه صفر (H₀): عضویت در دسته غالب و داشتن کلیک مستقل هستند
+فرضیه جایگزین (H₁): بین آن‌ها رابطه وجود دارد
+
+سطح معناداری: α = 0.05
+
+نتایج:
+χ² statistic = 0.00 (خیلی کوچک)
+p-value = 1.0 (خیلی بالا)
+df (درجه آزادی) = 1
+
+تصمیم: p-value > α → فرضیه صفر رد نمی‌شود
+      </div>
+
+      <p style="margin-top: 16px;"><strong>د) تفسیر نتایج:</strong></p>
+      <ul style="margin: 10px 0; padding-right: 20px;">
+        <li><strong>p-value = 1.0:</strong> بسیار غیر‌منطقی! هیچ ارتباطی وجود ندارد</li>
+        <li><strong>χ² ≈ 0:</strong> تقریباً هیچ اختلافی بین گروه‌ها نیست</li>
+        <li><strong>نتیجه:</strong> عضویت در دسته غالب **کاملاً** از کلیک مستقل است</li>
+        <li><strong>معنی:</strong> دسته غالب پیش‌بینی‌کننده خوبی برای کلیک نیست</li>
+      </ul>
+
+      <p style="margin-top: 16px;"><strong>ه) دلیل عدم ارتباط:</strong></p>
+      <ol style="margin: 10px 0; padding-right: 20px;">
+        <li><strong>حجم نمونه کوچک:</strong> فقط 46 کوئری در جدول contingency</li>
+        <li><strong>ID mismatch:</strong> اکثر محصولات مطابقت ندارند</li>
+        <li><strong>عوامل دیگر:</strong> کلیک بیشتر به رتبه‌بندی و کیفیت بستگی دارد</li>
+        <li><strong>توزیع نامتوازن:</strong> دسته کتاب 30% است</li>
+      </ol>
+
+      <p style="margin-top: 16px;"><strong>و) تفاوت منتظره و واقعی:</strong></p>
+      <table style="margin: 15px 0; width: 100%; font-size: 0.9rem;">
+        <tr style="background: var(--bg3);">
+          <th colspan="3" style="text-align: center;">جدول تقاطع (Contingency)</th>
+        </tr>
+        <tr style="background: var(--bg3);">
+          <th>وضعیت</th>
+          <th>کلیک ندارد</th>
+          <th>کلیک دارد</th>
+        </tr>
+        <tr>
+          <td>در دسته غالب نیست</td>
+          <td>N11</td>
+          <td>N12</td>
+        </tr>
+        <tr>
+          <td>در دسته غالب است</td>
+          <td>N21</td>
+          <td>N22</td>
+        </tr>
+      </table>
+
+      <p style="margin-top: 16px;"><strong>ز) پیامدهای عملی:</strong></p>
+      <ul style="margin: 10px 0; padding-right: 20px;">
+        <li><strong>نتیجه منفی:</strong> دسته غالب برای Ranking مفید نیست</li>
+        <li><strong>اثر مثبت:</strong> باید فاکتورهای دیگر را بررسی کنیم</li>
+        <li><strong>توصیه:</strong> استفاده از رتبه‌بندی چند‌منظوره</li>
+        <li><strong>تحقیق بیشتر:</strong> تأثیر دسته‌های فردی برای هر نوع کوئری</li>
+      </ul>
+    </div>
+
+    <div class="insight-box green">
+      <h4>✓ نتیجه‌گیری</h4>
+      <p>آزمون مربع کای نشان می‌دهد که دسته غالب و کلیک‌ها کاملاً مستقل هستند (p = 1.0). این بدان معناست که کاربران تحت‌تأثیر دسته غالب نتایج کلیک نمی‌کنند. فاکتورهای دیگری مثل رتبه‌بندی و کیفیت محصول مهم‌تر هستند.</p>
+    </div>
+  </div>
+</div>
+
+</div><!-- /container -->
+
+<!-- COMPREHENSIVE CONCLUSION -->
+<div class="conclusion" style="margin: 45px 50px;">
+  <h2>🎯 نتیجه‌گیری جامع پروژه</h2>
+  
+  <p style="margin: 16px 0; line-height: 1.9;">
+    این پروژه تحلیل جامعی از 5000 کوئری و 4999 محصول در یک سیستم تجارت الکترونیکی ارائه داد. 
+    مسائل کیفی داده (1765 کوئری تکراری و 714 قیمت ناقص) شناسایی شدند. 
+    با استفاده از روش IQR، 833 داده پرت (16.7%) حذف شد تا دیتاست پاکیزه‌شده 
+    برای تحلیل‌های بیشتر آماده شود.
+  </p>
+
+  <p style="margin: 16px 0; line-height: 1.9;">
+    تحلیل آماری نشان داد که داده‌ها از توزیع نرمال پیروی نمی‌کنند (p < 0.0001) 
+    بلکه از الگوی Power-law و Zipf's Law پیروی می‌کنند. 
+    این الگو در سیستم‌های تجارت الکترونیکی عام است و 80/20 rule را نشان می‌دهد.
+  </p>
+
+  <p style="margin: 16px 0; line-height: 1.9;">
+    رابطه ضعیفی (r = 0.33) بین بازیابی‌ها و کلیک‌ها مشاهده شد، 
+    که نشان می‌دهد کیفیت محصول، رتبه‌بندی، و عوامل UX از تنها بازیابی مهم‌تر هستند. 
+    کتاب‌ها بیشترین CTR (92%) را داشتند در حالی‌که دسته‌های دیگر برای بهبود نیاز دارند.
+  </p>
+
+  <p style="margin: 16px 0; line-height: 1.9;">
+    نهایتاً، آزمون مربع کای نشان داد که عضویت در دسته غالب هیچ پیش‌بینی‌کننده معنادار برای کلیک نیست (p = 1.0)، 
+    که تأکید می‌کند بر اهمیت فاکتورهای دیگر در رتبه‌بندی نتایج.
+  </p>
+
+  <div class="conclusion-grid" style="margin-top: 30px;">
+    <div class="con-item">
+      <h4>📊 نکات کلیدی</h4>
+      <p>داده‌های تجارت الکترونیکی معمولاً نرمال نیستند. بیشتر فعالیت توسط تعداد کمی محصول انجام می‌شود. کیفیت بر مقدار برتری دارد.</p>
+    </div>
+    <div class="con-item">
+      <h4>💡 پیشنهادات</h4>
+      <p>استفاده از آزمون‌های ناپارامتری، تمرکز بر رتبه‌بندی کیفیت، بهبود فیچرهای UX، و توسعه Long-tail برای نیش‌های جدید.</p>
+    </div>
+    <div class="con-item">
+      <h4>🎯 اهداف آینده</h4>
+      <p>شناسایی فاکتورهای واقعی موثر بر CTR، بهینه‌سازی موتور جستجو برای کیفیت، و پیاده‌سازی مدل‌های پیش‌بینی‌کننده.</p>
+    </div>
+    <div class="con-item">
+      <h4>📈 ارزش تجاری</h4>
+      <p>درک عمیق‌تر از رفتار کاربران، بهبود تجربه جستجو، افزایش رضایت مشتری، و بالابردن میزان تبدیل.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="author-info">
+    <p><strong>نویسنده:</strong> ابوالفضل امیدیان</p>
+    <p><strong>شماره دانشجویی:</strong> 404443019</p>
+    <p><strong>مقطع تحصیلی:</strong> کارشناسی ارشد فناوری اطلاعات - معماری سازمانی</p>
+  </div>
+  <div class="footer-meta">
+    <p>گزارش تحلیل هوش تجاری | تحلیل داده‌های جستجو و محصول تجارت الکترونیکی</p>
+    <p>Python · Pandas · Matplotlib · SciPy</p>
+    <p style="margin-top: 12px; color: var(--text2); font-size: 0.8rem;">تمام 10 سؤال با جزئیات کامل پاسخ داده شدند.</p>
+  </div>
+</footer>
+
+</body>
+</html>

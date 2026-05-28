@@ -1,8 +1,8 @@
 # Business Intelligence Homework Project
 ## E-Commerce Query & Product Data Analysis
 
-**Author:** Abolfazl Omidian  
-**Degree:** Master's Degree in Information Technology - Organizational Architecture  
+**Author:** Abolfazl Omidiyan  
+**Degree:** Master's Student in Information Technology - Organizational Architecture  
 **Student Number:** 404443019
 
 ---
@@ -289,3 +289,5 @@ For questions about this project:
 **All 10 Questions Covered:** Yes ✓  
 **English Report Included:** Yes ✓  
 **Author Information Added:** Yes ✓
+
+https://ir.linkedin.com/in/abolfazl-omidiyan
